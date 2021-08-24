@@ -1,4 +1,4 @@
-package com.unicorn.refuel.data.model.response.base
+package com.unicorn.refuel.data.model.base
 
 import com.unicorn.refuel.app.toast
 

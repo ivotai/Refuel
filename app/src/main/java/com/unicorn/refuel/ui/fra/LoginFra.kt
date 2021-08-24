@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.blankj.utilcode.util.EncryptUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.utils.sizeDp
 import com.rxjava.rxlife.lifeOnMain
+import com.unicorn.refuel.MainActivity
 import com.unicorn.refuel.app.*
 import com.unicorn.refuel.data.model.param.UserLoginParam
 import com.unicorn.refuel.databinding.FraLoginBinding
@@ -60,32 +60,18 @@ class LoginFra : BaseFra() {
             .subscribe(
                 { response ->
                     if (response.failed) return@subscribe
-//                    loggedUser = response.data
-//                    isLogin = true
-//                    saveUserInfo()
-//                    toActAndFinish(MainAct::class.java)
+                    loggedUser = response.data
+                    isLogin = true
+                    with(UserInfo) {
+                        loginStr = etLoginStr.trimText()
+                        userPwd = etUserPwd.trimText()
+                    }
+                    startAct(targetClass = MainActivity::class.java,finishAct = true)
                 },
                 {
                     it.errorMsg().toast()
                 }
             )
-
-
-//        api.login(etUsername.trimText(), etPassword.trimText())
-//            .lifeOnMain(this@LoginFra)
-//            .subscribe(
-//                {
-//                    if (it.failed) return@subscribe
-//                    Globals.loginResponse = it
-//                    Globals.isLogout = false
-//                    with(UserInfo) {
-//                        username = etUsername.trimText()
-//                        password = etPassword.trimText()
-//                    }
-//                    VersionHelper.checkVersion(requireActivity())
-//                },
-//                { it.errorMsg().toast() }
-//            )
     }
 
     // ----

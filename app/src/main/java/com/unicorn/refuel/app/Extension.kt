@@ -30,8 +30,8 @@ fun Context.startAct(cls: Class<*>) {
     startActivity(Intent(this, cls))
 }
 
-fun Fragment.startAct(cls: Class<*>, finishAct: Boolean = false) {
-    requireActivity().startAct(cls, finishSelf = finishAct)
+fun Fragment.startAct(targetClass: Class<*>, finishAct: Boolean = false) {
+    requireActivity().startAct(targetClass, finishSelf = finishAct)
 }
 
 fun TextView.trimText() = text.toString().trim()

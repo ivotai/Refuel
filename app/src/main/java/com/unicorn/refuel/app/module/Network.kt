@@ -33,7 +33,7 @@ val networkModule = module {
             .baseUrl(baseUrl)
             .client(get())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
 
     }
