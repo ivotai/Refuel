@@ -103,5 +103,8 @@ dependencies {
     //
     implementation 'joda-time:joda-time:2.10.10'
 
+    //
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
 
 }
