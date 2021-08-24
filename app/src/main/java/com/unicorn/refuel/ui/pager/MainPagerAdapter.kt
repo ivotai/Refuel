@@ -3,6 +3,7 @@ package com.unicorn.refuel.ui.pager
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.unicorn.refuel.ui.fra.LoginFra
+import com.unicorn.refuel.ui.fra.TestFra
 
 class MainPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -13,6 +14,6 @@ class MainPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = titles.size
 
     override fun createFragment(position: Int): Fragment =
-        LoginFra()
+        if (position == 0) LoginFra() else TestFra()
 
 }

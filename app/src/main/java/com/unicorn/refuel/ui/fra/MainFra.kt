@@ -20,18 +20,19 @@ import com.unicorn.refuel.ui.pager.MainPagerAdapter
 class MainFra : BaseFra() {
 
     override fun initViews() = with(binding) {
-        initM()
+        initTabLayoutMediator()
     }
 
-    private fun initM() = with(binding) {
+    private fun initTabLayoutMediator() = with(binding) {
         viewPager2.adapter = MainPagerAdapter(this@MainFra)
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
                 0 -> {
                     tab.text = MainPagerAdapter.titles[0]
-                    tab.icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_car_alt).apply {
-                        sizeDp = 24
-                    }
+                    tab.icon =
+                        IconicsDrawable(requireContext(), FontAwesome.Icon.faw_car_alt).apply {
+                            sizeDp = 24
+                        }
                 }
                 1 -> {
                     tab.text = MainPagerAdapter.titles[1]
@@ -43,7 +44,7 @@ class MainFra : BaseFra() {
         }.attach()
     }
 
-    override fun initBindings(): Unit = with(binding) {
+    override fun initBindings() = with(binding) {
         getCarFuelList()
     }
 
