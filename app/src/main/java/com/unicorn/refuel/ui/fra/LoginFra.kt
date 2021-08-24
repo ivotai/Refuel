@@ -18,7 +18,6 @@ import com.unicorn.refuel.ui.fra.base.BaseFra
 class LoginFra : BaseFra() {
 
     override fun initViews() = with(binding) {
-        btnLogin.isEnabled = false
         tilUsername.startIconDrawable =
             IconicsDrawable(requireContext(), FontAwesome.Icon.faw_user1).apply {
                 sizeDp = 24

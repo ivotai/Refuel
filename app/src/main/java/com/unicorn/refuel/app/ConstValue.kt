@@ -18,3 +18,5 @@ const val defaultPageSize = 10
 
 const val timeout = 20000L
 
+const val sizeDp = 24
+

@@ -1,0 +1,18 @@
+package com.unicorn.refuel.ui.pager
+
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.unicorn.refuel.ui.fra.LoginFra
+
+class MainPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+    companion object {
+        val titles = listOf("车辆加油", "车辆维保")
+    }
+
+    override fun getItemCount() = titles.size
+
+    override fun createFragment(position: Int): Fragment =
+        LoginFra()
+
+}
