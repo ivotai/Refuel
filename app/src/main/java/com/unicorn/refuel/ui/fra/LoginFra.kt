@@ -18,6 +18,7 @@ import com.unicorn.refuel.ui.fra.base.BaseFra
 class LoginFra : BaseFra() {
 
     override fun initViews() = with(binding) {
+        btnLogin.isEnabled = false
         tilUsername.startIconDrawable =
             IconicsDrawable(requireContext(), FontAwesome.Icon.faw_user1).apply {
                 sizeDp = 24
@@ -32,11 +33,9 @@ class LoginFra : BaseFra() {
         }
     }
 
-
     override fun initBindings(): Unit = with(binding) {
         btnLogin.safeClicks().subscribe { loginX() }
     }
-
 
     private fun loginX() = with(binding) {
         if (etLoginStr.isEmpty()) {
@@ -55,20 +54,23 @@ class LoginFra : BaseFra() {
             loginStr = etLoginStr.trimText(),
             userPwd = EncryptUtils.encryptMD5ToString(etUserPwd.trimText())
         )
+        btnLogin.isEnabled = false
         api.login(userLoginParam = userLoginParam)
             .lifeOnMain(this@LoginFra)
             .subscribe(
-                { response ->
-                    if (response.failed) return@subscribe
-                    loggedUser = response.data
+                {
+                    btnLogin.isEnabled = true
+                    if (it.failed) return@subscribe
+                    loggedUser = it.data
                     isLogin = true
                     with(UserInfo) {
                         loginStr = etLoginStr.trimText()
                         userPwd = etUserPwd.trimText()
                     }
-                    startAct(targetClass = MainAct::class.java,finishAct = true)
+                    startAct(targetClass = MainAct::class.java, finishAct = true)
                 },
                 {
+                    btnLogin.isEnabled = true
                     it.errorMsg().toast()
                 }
             )
