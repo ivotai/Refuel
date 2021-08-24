@@ -14,6 +14,8 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.jakewharton.rxbinding4.view.clicks
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.HttpException
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
@@ -44,7 +46,6 @@ fun ViewPager2.removeEdgeEffect() {
     (this.getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 }
 
-
 fun Throwable.errorMsg(): String {
     val errorMsg = when (this) {
         is UnknownHostException -> "接口地址设置有误或无网络"
@@ -56,6 +57,10 @@ fun Throwable.errorMsg(): String {
         else -> toString()
     }
     return errorMsg
+}
+
+fun Throwable.showError() {
+    this.errorMsg().toast()
 }
 
 fun RecyclerView.addDefaultItemDecoration() {
@@ -72,3 +77,17 @@ fun RecyclerView.addDefaultItemDecoration() {
 fun Fragment.finishAct() = this.requireActivity().finish()
 
 //fun Long.toDisplayDateFormat(): String = DateTime(this).toString(displayDateFormat)
+
+// https://www.jianshu.com/p/ea63991fbc05
+inline fun <reified T> String.toBeanList(): List<T> =
+    SimpleComponent().gson.fromJson(this, ParameterizedTypeImpl(T::class.java))
+
+class ParameterizedTypeImpl(private val clz: Class<*>) : ParameterizedType {
+    override fun getRawType(): Type = List::class.java
+
+    override fun getOwnerType(): Type? = null
+
+    override fun getActualTypeArguments(): Array<Type> = arrayOf(clz)
+}
+
+inline fun <reified T> String.toBean(): T = SimpleComponent().gson.fromJson(this, T::class.java)

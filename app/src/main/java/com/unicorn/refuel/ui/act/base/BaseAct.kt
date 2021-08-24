@@ -17,7 +17,7 @@ abstract class BaseAct : AppCompatActivity() {
         if (savedInstanceState != null) return
 
         // Create a new Fragment to be placed in the activity layout
-        val fragment = createFragment()
+        val fragment = createFra()
 
         // In case this activity was started with special instructions from an
         // Intent, pass the Intent's extras to the fragment as arguments
@@ -28,6 +28,6 @@ abstract class BaseAct : AppCompatActivity() {
             .add(R.id.fragment_container_view, fragment).commit()
     }
 
-    abstract fun createFragment(): Fragment
+    abstract fun createFra(): Fragment
 
 }

@@ -1,6 +1,8 @@
 package com.unicorn.refuel.data.model.base
 
 import com.blankj.utilcode.util.ToastUtils
+import com.unicorn.refuel.app.helper.EncryptionHelper
+import com.unicorn.refuel.app.toBeanList
 
 class PageResponse<T>(
     val errorCode: String,
@@ -19,4 +21,7 @@ class PageResponse<T>(
             if (failed) ToastUtils.showShort(errorMsg)
             return failed
         }
+
+    val itemsJson get() = EncryptionHelper.decrypt(encryptionData)
+
 }

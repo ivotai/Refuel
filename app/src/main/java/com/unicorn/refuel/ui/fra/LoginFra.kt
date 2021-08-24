@@ -9,10 +9,10 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.utils.sizeDp
 import com.rxjava.rxlife.lifeOnMain
-import com.unicorn.refuel.MainActivity
 import com.unicorn.refuel.app.*
 import com.unicorn.refuel.data.model.param.UserLoginParam
 import com.unicorn.refuel.databinding.FraLoginBinding
+import com.unicorn.refuel.ui.act.MainAct
 import com.unicorn.refuel.ui.fra.base.BaseFra
 
 class LoginFra : BaseFra() {
@@ -66,7 +66,7 @@ class LoginFra : BaseFra() {
                         loginStr = etLoginStr.trimText()
                         userPwd = etUserPwd.trimText()
                     }
-                    startAct(targetClass = MainActivity::class.java,finishAct = true)
+                    startAct(targetClass = MainAct::class.java,finishAct = true)
                 },
                 {
                     it.errorMsg().toast()
@@ -74,7 +74,7 @@ class LoginFra : BaseFra() {
             )
     }
 
-    // ----
+    //
 
     private var _binding: FraLoginBinding? = null
 
