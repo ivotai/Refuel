@@ -6,18 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.mikepenz.iconics.IconicsDrawable
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
+import com.mikepenz.iconics.utils.sizeDp
 import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
 import com.unicorn.refuel.data.model.param.CarFuelListParam
-import com.unicorn.refuel.databinding.UiSwipeBinding
+import com.unicorn.refuel.databinding.FraCarFuelBinding
 import com.unicorn.refuel.ui.adapter.CarFuelAdapter
 import com.unicorn.refuel.ui.fra.base.PageFra
+import com.unicorn.refuel.ui.pager.MainPagerAdapter
 import io.reactivex.rxjava3.core.Single
 
 class CarFueFra : PageFra<CarFuel>() {
+
+    override fun initViews()= with(binding) {
+        super.initViews()
+        with(extendedFloatingActionButton){
+            icon =  IconicsDrawable(requireContext(), FontAwesome.Icon.faw_plus)
+            text = MainPagerAdapter.titles[0]
+        }
+      }
 
     override fun initPageAdapter() {
         pageAdapter = CarFuelAdapter()
@@ -40,7 +52,7 @@ class CarFueFra : PageFra<CarFuel>() {
 
     //
 
-    private var _binding: UiSwipeBinding? = null
+    private var _binding: FraCarFuelBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -51,7 +63,7 @@ class CarFueFra : PageFra<CarFuel>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = UiSwipeBinding.inflate(inflater, container, false)
+        _binding = FraCarFuelBinding.inflate(inflater, container, false)
         return binding.root
     }
 
