@@ -43,6 +43,9 @@ android {
     viewBinding {
         enabled = true
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -105,6 +108,11 @@ dependencies {
 
     //
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
+    //
+    implementation 'com.github.jenly1314:zxing-lite:2.1.1'
+
+
 
 
 }
