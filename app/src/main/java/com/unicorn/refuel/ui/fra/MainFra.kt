@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
-import com.rxjava.rxlife.lifeOnMain
+import com.mikepenz.iconics.IconicsDrawable
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
+import com.mikepenz.iconics.utils.sizeDp
 import com.unicorn.refuel.app.*
-import com.unicorn.refuel.data.model.base.EncryptionRequest
-import com.unicorn.refuel.data.model.base.PageRequest
-import com.unicorn.refuel.data.model.param.CarFuelListParam
 import com.unicorn.refuel.databinding.FraMainBinding
 import com.unicorn.refuel.ui.fra.base.BaseFra
 import com.unicorn.refuel.ui.pager.MainPagerAdapter
@@ -26,16 +25,16 @@ class MainFra : BaseFra() {
             when (position) {
                 0 -> {
                     tab.text = MainPagerAdapter.titles[0]
-//                    tab.icon =
-//                        IconicsDrawable(requireContext(), FontAwesome.Icon.faw_car_alt).apply {
-//                            sizeDp = 24
-//                        }
+                    tab.icon =
+                        IconicsDrawable(requireContext(), FontAwesome.Icon.faw_car_alt).apply {
+                            sizeDp = 24
+                        }
                 }
                 1 -> {
                     tab.text = MainPagerAdapter.titles[1]
-//                    tab.icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_tools).apply {
-//                        sizeDp = 24
-//                    }
+                    tab.icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_tools).apply {
+                        sizeDp = 24
+                    }
                 }
             }
         }.attach()

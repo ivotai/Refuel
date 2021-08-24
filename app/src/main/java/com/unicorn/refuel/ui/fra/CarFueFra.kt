@@ -10,10 +10,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItems
-import com.blankj.utilcode.util.ConvertUtils
-import com.joaquimley.faboptions.FabOptions
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
 import com.mikepenz.iconics.IconicsDrawable
@@ -28,7 +24,7 @@ import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
 import com.unicorn.refuel.data.model.param.CarFuelListParam
 import com.unicorn.refuel.databinding.FraCarFuelBinding
-import com.unicorn.refuel.ui.act.CarAct
+import com.unicorn.refuel.ui.act.CarFuelAddAct
 import com.unicorn.refuel.ui.adapter.CarFuelAdapter
 import com.unicorn.refuel.ui.fra.base.PageFra
 import io.reactivex.rxjava3.core.Single
@@ -38,17 +34,14 @@ class CarFueFra : PageFra<CarFuel>() {
 
     override fun initViews() = with(binding) {
         super.initViews()
-//        with(efabCreate) {
-//            icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_plus)
-//            iconPadding = ConvertUtils.dp2px(8f)
-////            text = MainPagerAdapter.titles[0]
-//        }
+        btnCreateCarFuel.icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_plus)
     }
 
     @SuppressLint("CheckResult")
     override fun initBindings(): Unit = with(binding) {
         super.initBindings()
-//        efabCreate.safeClicks().subscribe {
+        btnCreateCarFuel.safeClicks().subscribe {
+            startAct(CarFuelAddAct::class.java)
 //            MaterialDialog(requireContext()).show {
 //                title(text = "选择加油车辆")
 //                listItems(items = listOf("车辆扫码", "车辆列表选择")) { _, index, _ ->
@@ -59,13 +52,12 @@ class CarFueFra : PageFra<CarFuel>() {
 //                    }
 //                }
 //            }
-//        }
+        }
     }
 
     private fun scanCode() {
         activityResultLauncher.launch(Intent(context, CaptureActivity::class.java))
     }
-
 
     override fun addItemDecoration() {
         // no item decoration
@@ -107,8 +99,8 @@ class CarFueFra : PageFra<CarFuel>() {
 
         activityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                val result = CameraScan.parseScanResult(it.data)
-                result.toast()
+                val carId = CameraScan.parseScanResult(it.data)
+                carId.toast()
             }
 
         return binding.root
