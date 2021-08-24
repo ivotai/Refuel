@@ -100,4 +100,8 @@ dependencies {
     // tab
     implementation 'me.majiajie:pager-bottom-tab-strip:2.4.0'
 
+    //
+    implementation 'joda-time:joda-time:2.10.10'
+
+
 }

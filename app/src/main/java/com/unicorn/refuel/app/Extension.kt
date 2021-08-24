@@ -16,11 +16,13 @@ import com.blankj.utilcode.util.ToastUtils
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.jakewharton.rxbinding4.view.clicks
 import io.reactivex.rxjava3.core.Observable
+import org.joda.time.DateTime
 import retrofit2.HttpException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 fun View.safeClicks(): Observable<Unit> = this.clicks()
@@ -79,7 +81,9 @@ fun RecyclerView.addDefaultItemDecoration() {
 
 fun Fragment.finishAct() = this.requireActivity().finish()
 
-//fun Long.toDisplayDateFormat(): String = DateTime(this).toString(displayDateFormat)
+fun Long.toDisplayDateFormat(): String = DateTime(this).toString(displayDateFormat)
+
+fun Date.toDisplayDateFormat(): String = DateTime(this).toString(displayDateFormat)
 
 // https://www.jianshu.com/p/ea63991fbc05
 inline fun <reified T> String.toBeanList(): List<T> =
