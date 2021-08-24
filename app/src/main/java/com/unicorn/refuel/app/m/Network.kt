@@ -1,4 +1,4 @@
-package com.unicorn.refuel.app.module
+package com.unicorn.refuel.app.m
 
 import com.unicorn.refuel.app.baseUrl
 import okhttp3.OkHttpClient

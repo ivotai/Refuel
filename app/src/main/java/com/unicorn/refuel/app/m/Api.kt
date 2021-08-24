@@ -1,4 +1,4 @@
-package com.unicorn.refuel.app.module
+package com.unicorn.refuel.app.m
 
 import com.unicorn.refuel.data.api.SimpleApi
 import org.koin.dsl.module

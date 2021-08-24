@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Refuel"
-        tools:replace="android:allowBackup">
+        tools:replace="android:allowBackup,theme">
         <activity
             android:name=".ui.act.LoginAct"
             android:exported="true">

@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.baidu.ocr.sdk.OCR
+import com.baidu.ocr.sdk.OnResultListener
+import com.baidu.ocr.sdk.exception.OCRError
+import com.baidu.ocr.sdk.model.AccessToken
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
@@ -17,6 +21,7 @@ class MainFra : BaseFra() {
 
     override fun initViews() = with(binding) {
         initTabLayoutMediator()
+
     }
 
     private fun initTabLayoutMediator() = with(binding) {
@@ -40,12 +45,14 @@ class MainFra : BaseFra() {
         }.attach()
     }
 
-    //
+
+
+//
 
     private var _binding: FraMainBinding? = null
 
     // This property is only valid between onCreateView and
-    // onDestroyView.
+// onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

@@ -1,149 +1,64 @@
-[
-  {
-    "id": 13,
-    "carID": 1425,
-    "fuelUpTime": "2021-04-15",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "1032",
-    "unitPrice": 2.00,
-    "fuelAmount": 345.00,
-    "price": 2222.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "张三",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-08-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪GY0607",
-    "carNo": "沪GY0607",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  },
-  {
-    "id": 7,
-    "carID": 1425,
-    "fuelUpTime": "2021-04-07",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "1032",
-    "unitPrice": 5.00,
-    "fuelAmount": 345.00,
-    "price": 555.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "小猫咪",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-08-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪GY0607",
-    "carNo": "沪GY0607",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  },
-  {
-    "id": 2,
-    "carID": 1423,
-    "fuelUpTime": "2021-04-07",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "1032",
-    "unitPrice": 7.00,
-    "fuelAmount": 345.00,
-    "price": 77777.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "李四",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-08-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪A0617警",
-    "carNo": "沪A0617警",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  },
-  {
-    "id": 23,
-    "carID": 1418,
-    "fuelUpTime": "2021-04-07",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "1032",
-    "unitPrice": 4.00,
-    "fuelAmount": 345.00,
-    "price": 444.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "王五",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-08-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪A0617警",
-    "carNo": "沪A0617警",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  },
-  {
-    "id": 22,
-    "carID": 1418,
-    "fuelUpTime": "2021-03-07",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "1032",
-    "unitPrice": 3.00,
-    "fuelAmount": 345.00,
-    "price": 333.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "张三",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-08-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪A0617警",
-    "carNo": "沪A0617警",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  },
-  {
-    "id": 12,
-    "carID": 1425,
-    "fuelUpTime": "2021-03-07",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "1032",
-    "unitPrice": 1.00,
-    "fuelAmount": 345.00,
-    "price": 1111.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "李四",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-08-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪GY0607",
-    "carNo": "沪GY0607",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  },
-  {
-    "id": 1,
-    "carID": 1423,
-    "fuelUpTime": "2021-03-02",
-    "fuelCardNo": "3125124",
-    "fuelLabelNumber": "123",
-    "unitPrice": 123.00,
-    "fuelAmount": 123.00,
-    "price": 15129.00,
-    "mileage": 321,
-    "userID": "",
-    "userName": "张三",
-    "createdBy": "31011519920701041130",
-    "createdServerTime": "2021-03-04 13:31:16",
-    "isDeleted": false,
-    "carName": "沪A0617警",
-    "carNo": "沪A0617警",
-    "orgID": 30,
-    "createdByUserName": "测试人员",
-    "idCardNumber": null
-  }
-]
+{
+  "words_result": [
+    {
+      "words": "欢迎使用中国石化加油1C卡"
+    },
+    {
+      "words": "““““““““”“““““““"
+    },
+    {
+      "words": "加油站编码:32750055"
+    },
+    {
+      "words": "枪号:7"
+    },
+    {
+      "words": "卡号:01000113100018419079"
+    },
+    {
+      "words": "流水号(P0S-TTC):140188"
+    },
+    {
+      "words": "扣前余额:812.00元"
+    },
+    {
+      "words": "油品代码:1032"
+    },
+    {
+      "words": "单价:7.02元/升"
+    },
+    {
+      "words": "加油升数:14.25升"
+    },
+    {
+      "words": "应付:100.00元"
+    },
+    {
+      "words": "扣卡:100.00元"
+    },
+    {
+      "words": "联机:0.00元"
+    },
+    {
+      "words": "优惠:0.00元"
+    },
+    {
+      "words": "优惠规则;65536"
+    },
+    {
+      "words": "扣后余额:712.00儿"
+    },
+    {
+      "words": "交易类型:正常"
+    },
+    {
+      "words": "交易时间:2021年0B121108:2719"
+    },
+    {
+      "words": "车作销证(知2从"
+    }
+  ],
+  "words_result_num": 19,
+  "direction": 0,
+  "log_id": 1430196329583822854
+}

@@ -1,5 +1,6 @@
 package com.unicorn.refuel.ui.fra
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.utils.sizeDp
 import com.rxjava.rxlife.lifeOnMain
+import com.tbruyelle.rxpermissions3.RxPermissions
 import com.unicorn.refuel.app.*
 import com.unicorn.refuel.data.model.param.UserLoginParam
 import com.unicorn.refuel.databinding.FraLoginBinding
@@ -33,7 +35,17 @@ class LoginFra : BaseFra() {
     }
 
     override fun initBindings(): Unit = with(binding) {
+        requestPermissions()
         btnLogin.safeClicks().subscribe { loginX() }
+    }
+
+    private fun requestPermissions() {
+        RxPermissions(this)
+            .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+            .subscribe { granted ->
+                if (!granted)
+                    finishAct()
+            }
     }
 
     private fun loginX() = with(binding) {

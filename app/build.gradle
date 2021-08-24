@@ -113,6 +113,7 @@ dependencies {
     implementation 'com.github.jenly1314:zxing-lite:2.1.1'
 
     //
+    implementation 'com.github.tbruyelle:rxpermissions:0.12'
 
 
 

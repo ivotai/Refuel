@@ -1,9 +1,9 @@
 package com.unicorn.refuel.app
 
 import androidx.multidex.MultiDexApplication
-import com.unicorn.refuel.app.module.apiModule
-import com.unicorn.refuel.app.module.appModule
-import com.unicorn.refuel.app.module.networkModule
+import com.unicorn.refuel.app.m.apiModule
+import com.unicorn.refuel.app.m.appModule
+import com.unicorn.refuel.app.m.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
