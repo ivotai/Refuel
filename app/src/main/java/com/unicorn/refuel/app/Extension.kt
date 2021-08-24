@@ -3,8 +3,11 @@ package com.unicorn.refuel.app
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -91,3 +94,13 @@ class ParameterizedTypeImpl(private val clz: Class<*>) : ParameterizedType {
 }
 
 inline fun <reified T> String.toBean(): T = SimpleComponent().gson.fromJson(this, T::class.java)
+
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
+}

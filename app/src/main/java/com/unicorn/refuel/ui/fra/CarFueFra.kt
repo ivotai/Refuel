@@ -1,14 +1,21 @@
 package com.unicorn.refuel.ui.fra
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.blankj.utilcode.util.ConvertUtils
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.utils.sizeDp
+import com.unicorn.refuel.R
+import com.unicorn.refuel.app.getColorFromAttr
 import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.base.EncryptionRequest
@@ -30,6 +37,17 @@ class CarFueFra : PageFra<CarFuel>() {
             text = MainPagerAdapter.titles[0]
         }
       }
+
+
+    override fun addItemDecoration() {
+        MaterialDividerItemDecoration(
+            requireContext(),
+            LinearLayoutManager.VERTICAL
+        ).apply {
+            dividerThickness = ConvertUtils.dp2px(16f)
+            dividerColor = requireContext().getColorFromAttr(R.attr.backgroundColor)
+        }.let { mRecyclerView.addItemDecoration(it) }
+    }
 
     override fun initPageAdapter() {
         pageAdapter = CarFuelAdapter()
