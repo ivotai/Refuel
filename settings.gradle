@@ -3,7 +3,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        maven { url "https://jitpack.io" }
+        gradlePluginPortal()
+        //noinspection JcenterRepositoryObsolete
+        jcenter() {
+            content {
+                includeModule("com.kaopiz", "kprogresshud")
+            }
+        }
     }
 }
 rootProject.name = "Refuel"
