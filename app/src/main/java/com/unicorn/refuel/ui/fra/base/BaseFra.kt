@@ -14,13 +14,13 @@ abstract class BaseFra : Fragment(), UI {
         initEvents()
     }
 
-    override fun initViews() {
+    override fun initViews(): Unit {
     }
 
-    override fun initBindings() {
+    override fun initBindings(): Unit {
     }
 
-    override fun initEvents() {
+    override fun initEvents(): Unit {
     }
 
     val api by lazy { SimpleComponent().api }

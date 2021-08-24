@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": "0",
+  "data": {
+    "sid": null,
+    "uid": "",
+    "userName": "测试人员",
+    "role": 1,
+    "roleName": "管理员",
+    "orgID": 30,
+    "orgName": "公安学院",
+    "encryptionId": "A50FDBE6FBC4BAD127D7A1280C0A32536F7FE3217F8D9B41DBACF03E8A235B27",
+    "userKey": "7DA66BFBB549ED25FEBBFFDA50636260",
+    "userToken": "9427D75E43C8AA3813C0E560724709015C98F644481049FCF0F09EEAC91C42205E5AF8A6604F7BA54D60D87B1E9150C4F1BFE33FCBC3CF519C228542309E1FFA2087FB6262F78FBF0E01918F70773B3794E5805204478106A089846256D41820"
+  },
+  "extendData": null
+}
+
