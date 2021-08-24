@@ -12,7 +12,7 @@ class PageResponse<T>(
     val pageSize: Int,
     val total: Int,          // 总数
     val totalPage: Int,      // 总页数
-    var items: List<T>,
+    var items: List<T>?,
     val encryptionData: String
 ) {
     val failed: Boolean

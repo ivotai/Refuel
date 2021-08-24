@@ -10,10 +10,10 @@ data class EncryptionRequest(
     val UserToken: String = loggedUser.userToken
 ) {
     companion object {
-        fun create(basePostInfo: BasePostInfo): EncryptionRequest {
+        fun create(any: Any): EncryptionRequest {
             // 确保从服务获取的数据也被填充 uid
 //            if (basePostInfo.idCardNumber == null) basePostInfo.idCardNumber = loggedUser.uid
-            val json = SimpleComponent().gson.toJson(basePostInfo)
+            val json = SimpleComponent().gson.toJson(any)
             val param = EncryptionHelper.encrypt(json)
             return EncryptionRequest(Param = param)
         }

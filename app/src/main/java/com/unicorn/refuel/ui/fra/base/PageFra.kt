@@ -55,10 +55,10 @@ abstract class PageFra<T> : BaseFra() {
             initPageAdapter()
             adapter = pageAdapter
         }
-        initItemDecoration(mRecyclerView)
+        addItemDecoration()
     }
 
-    protected open fun initItemDecoration(recyclerView: RecyclerView) {
+    protected open fun addItemDecoration() {
         mRecyclerView.addDefaultItemDecoration()
     }
 
@@ -100,11 +100,11 @@ abstract class PageFra<T> : BaseFra() {
         loadPage(nextPage)
             .lifeOnMain(this)
             .subscribe({
-                if (it.failed) {
+                if (it.failed || it.items == null) {
                     loadMoreModule.loadMoreFail()
                     return@subscribe
                 }
-                pageAdapter.addData(it.items)
+                pageAdapter.addData(it.items!!)
                 loadMoreModule.loadMoreComplete()
                 checkIsLoadAll(it)
             }, {
