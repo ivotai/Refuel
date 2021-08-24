@@ -22,7 +22,7 @@ class CarFuelAdapter : BaseQuickAdapter<CarFuel, BaseViewHolder>(R.layout.item_c
 
     override fun convert(holder: BaseViewHolder, item: CarFuel) {
         holder.apply {
-            setText(R.id.textView,"hehe")
+//            setText(R.id.textView,"hehe")
         }
     }
 
