@@ -7,10 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.rxjava.rxlife.lifeOnMain
 import com.unicorn.refuel.R
-import com.unicorn.refuel.app.addDefaultItemDecoration
-import com.unicorn.refuel.app.defaultPageSize
-import com.unicorn.refuel.app.errorMsg
-import com.unicorn.refuel.app.toast
+import com.unicorn.refuel.app.*
 import com.unicorn.refuel.data.model.base.PageResponse
 import io.reactivex.rxjava3.core.Single
 
@@ -44,8 +41,7 @@ abstract class PageFra<T> : BaseFra() {
     private fun initSwipeRefreshLayout() {
         mSwipeRefreshLayout.run {
             setColorSchemeResources(R.color.white)
-            // todo
-            setProgressBackgroundColorSchemeResource(R.color.md_purple_200)
+            setProgressBackgroundColorSchemeColor(requireContext().getColorFromAttr(R.attr.colorPrimary))
         }
     }
 

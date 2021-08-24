@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.blankj.utilcode.util.ConvertUtils
+import com.joaquimley.faboptions.FabOptions
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
 import com.mikepenz.iconics.IconicsDrawable
@@ -37,42 +38,34 @@ class CarFueFra : PageFra<CarFuel>() {
 
     override fun initViews() = with(binding) {
         super.initViews()
-        with(efabCreate) {
-            icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_plus)
-            iconPadding = ConvertUtils.dp2px(8f)
-//            text = MainPagerAdapter.titles[0]
-        }
+//        with(efabCreate) {
+//            icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_plus)
+//            iconPadding = ConvertUtils.dp2px(8f)
+////            text = MainPagerAdapter.titles[0]
+//        }
     }
 
     @SuppressLint("CheckResult")
     override fun initBindings(): Unit = with(binding) {
         super.initBindings()
-        efabCreate.safeClicks().subscribe {
-            MaterialDialog(requireContext()).show {
-                title(text = "选择加油车辆")
-                listItems(items = listOf("车辆扫码", "车辆列表选择")) { _, index, _ ->
-                    if (index == 0) {
-                        scanCode()
-                    } else {
-                        startAct(CarAct::class.java)
-                    }
-                }
-            }
-        }
+//        efabCreate.safeClicks().subscribe {
+//            MaterialDialog(requireContext()).show {
+//                title(text = "选择加油车辆")
+//                listItems(items = listOf("车辆扫码", "车辆列表选择")) { _, index, _ ->
+//                    if (index == 0) {
+//                        scanCode()
+//                    } else {
+//                        startAct(CarAct::class.java)
+//                    }
+//                }
+//            }
+//        }
     }
 
     private fun scanCode() {
         activityResultLauncher.launch(Intent(context, CaptureActivity::class.java))
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        data
-        super.onActivityResult(requestCode, resultCode, data)
-
-        val result = CameraScan.parseScanResult(data)
-        result.toast()
-
-    }
 
     override fun addItemDecoration() {
         // no item decoration
