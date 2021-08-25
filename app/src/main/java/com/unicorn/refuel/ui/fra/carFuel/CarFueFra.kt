@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.refuel.R
 import com.unicorn.refuel.app.RxBus
-import com.unicorn.refuel.app.helper.ExportHelper
+import com.unicorn.refuel.app.helper.ExcelHelper
 import com.unicorn.refuel.app.inSelectMode
 import com.unicorn.refuel.app.startAct
 import com.unicorn.refuel.app.toBeanList
@@ -51,7 +51,9 @@ class CarFueFra : PageFra<CalFuelSelect>() {
                 }
                 R.id.car_fuel_export_all -> {
                     // 导出全部
-                    ExportHelper.exportCarFuels(pageAdapter.data.map { it.carFuel })
+                    ExcelHelper.exportCarFuels(
+                        requireContext(),
+                        pageAdapter.data.map { it.carFuel })
                     return@setOnMenuItemClickListener true
 
                 }
@@ -65,8 +67,10 @@ class CarFueFra : PageFra<CalFuelSelect>() {
                             ToastUtils.showShort("未选中一条记录")
                             return@setOnMenuItemClickListener true
                         }
-                        ExportHelper.exportCarFuels(pageAdapter.data.filter { it.isSelected }
-                            .map { it.carFuel })
+                        ExcelHelper.exportCarFuels(
+                            requireContext(),
+                            pageAdapter.data.filter { it.isSelected }
+                                .map { it.carFuel })
                     }
                     return@setOnMenuItemClickListener true
                 }

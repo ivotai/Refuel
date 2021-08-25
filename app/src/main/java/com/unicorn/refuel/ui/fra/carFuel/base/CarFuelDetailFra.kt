@@ -53,7 +53,6 @@ abstract class CarFuelDetailFra : RecognizeFra() {
             MaterialDialog(requireContext()).show {
                 dateTimePicker(requireFutureDateTime = true) { _, dateTime ->
                     tvFuelUpTime.text = dateTime.time.toDisplayFormat()
-                    7
                 }
             }
         }
@@ -63,7 +62,7 @@ abstract class CarFuelDetailFra : RecognizeFra() {
         btnSubmit.safeClicks().subscribe { submit() }
     }
 
-    private fun submit() = with(binding) {
+    private fun submit(): Unit = with(binding) {
         if (tvCarNo.isEmpty() ||
             etFuelCardNo.isEmpty() ||
             etFuelLabelNumber.isEmpty() ||
