@@ -1,7 +1,6 @@
 package com.unicorn.refuel.ui.fra
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,7 +32,7 @@ import com.unicorn.refuel.ui.fra.base.BaseFra
 class CarFuelAddFra : BaseFra() {
 
     override fun initViews() = with(binding) {
-        binding.btnScan.icon =
+        binding.btnRecognize.icon =
             IconicsDrawable(requireContext(), FontAwesome.Icon.faw_image1).apply {
                 sizeDp = 24
             }
@@ -53,7 +52,14 @@ class CarFuelAddFra : BaseFra() {
             }
         }
 
+        btnRecognize.safeClicks().subscribe { recognize() }
     }
+
+    private fun s(json: String) {
+        json.toast()
+    }
+
+    //
 
     private fun scanCarCode() {
         launcherScanCarCode.launch(Intent(context, CaptureActivity::class.java))
@@ -68,6 +74,8 @@ class CarFuelAddFra : BaseFra() {
         })
     }
 
+    //
+
     private fun recognize() {
         if (!checkTokenStatus()) {
             return
@@ -81,11 +89,8 @@ class CarFuelAddFra : BaseFra() {
             CameraActivity.KEY_CONTENT_TYPE,
             CameraActivity.CONTENT_TYPE_GENERAL
         )
-        startActivityForResult(intent, 2333)
-
+        launcherRecognize.launch(intent)
     }
-
-    //
 
     private fun checkTokenStatus(): Boolean {
         if (!hasGotToken) {
@@ -115,17 +120,6 @@ class CarFuelAddFra : BaseFra() {
         OCR.getInstance(requireContext()).release()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 2333 && resultCode == Activity.RESULT_OK) {
-            RecognizeService.recognizeGeneralBasic(
-                requireContext(),
-                FileUtil.getSaveFile(requireContext()).absolutePath
-            ) { result -> result?.toast() }
-
-        }
-    }
-
     //
 
     private var _binding: FraCarFuelDetailBinding? = null
@@ -135,6 +129,8 @@ class CarFuelAddFra : BaseFra() {
     private val binding get() = _binding!!
 
     lateinit var launcherScanCarCode: ActivityResultLauncher<Intent>
+
+    lateinit var launcherRecognize: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -149,6 +145,15 @@ class CarFuelAddFra : BaseFra() {
                 val json = CameraScan.parseScanResult(it.data)
                 // todo
                 json.toast()
+            }
+
+        launcherRecognize =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.data == null) return@registerForActivityResult
+                RecognizeService.recognizeGeneralBasic(
+                    requireContext(),
+                    FileUtil.getSaveFile(requireContext()).absolutePath
+                ) { result -> s(json = result) }
             }
 
         return binding.root
