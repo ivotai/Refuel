@@ -108,3 +108,9 @@ fun Context.getColorFromAttr(
     theme.resolveAttribute(attrColor, typedValue, resolveRefs)
     return typedValue.data
 }
+
+fun Fragment.getAttrColor(
+    @AttrRes attrColor: Int,
+): Int {
+    return this.requireContext().getColorFromAttr(attrColor = attrColor)
+}
