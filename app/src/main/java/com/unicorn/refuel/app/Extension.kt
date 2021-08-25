@@ -26,6 +26,7 @@ import java.net.UnknownHostException
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+
 fun View.safeClicks(): Observable<Unit> = this.clicks()
     .throttleFirst(2, TimeUnit.SECONDS)
 
@@ -88,6 +89,11 @@ fun Long.toDisplayFormat(): String = DateTime(this).toString(displayDateFormat)
 fun Date.toDisplayFormat(): String = DateTime(this).toString(displayDateFormat)
 
 fun Date.toTransferFormat(): String = DateTime(this).toString(transferDateFormat)
+
+fun String.toDate(): Boolean {
+    var flag = true
+    return flag
+}
 
 // https://www.jianshu.com/p/ea63991fbc05
 inline fun <reified T> String.toBeanList(): List<T> =
