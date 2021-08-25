@@ -11,7 +11,7 @@ class CarFuelAddFra : CarFuelDetailFra() {
 
     override fun initViews():Unit = with(binding) {
         super.initViews()
-        materialToolbar.title = "添加车辆加油记录"
+        materialToolbar.title = "添加加油记录"
     }
 
     override fun submitX(): Unit = with(binding) {
@@ -23,7 +23,6 @@ class CarFuelAddFra : CarFuelDetailFra() {
             fuelAmount = etFuelAmount.trimText().toDouble(),
             price = etPrice.trimText().toDouble(),
             userName = etUserName.trimText(),
-            // todo
             fuelUpTime = tvFuelUpTime.trimText()
         )
         btnSubmit.isEnabled = false

@@ -25,6 +25,10 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.*
 import java.util.concurrent.TimeUnit
+import org.joda.time.format.DateTimeFormat
+
+
+
 
 
 fun View.safeClicks(): Observable<Unit> = this.clicks()
@@ -90,9 +94,10 @@ fun Date.toDisplayFormat(): String = DateTime(this).toString(displayDateFormat)
 
 fun Date.toTransferFormat(): String = DateTime(this).toString(transferDateFormat)
 
-fun String.toDate(): Boolean {
-    var flag = true
-    return flag
+fun String.toDate(): Date {
+    val dateTimeFormatter = DateTimeFormat.forPattern(displayDateFormat)
+    val dateTime: DateTime = dateTimeFormatter.parseDateTime(this)
+    return dateTime.toDate()
 }
 
 // https://www.jianshu.com/p/ea63991fbc05

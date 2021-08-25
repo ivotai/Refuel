@@ -14,7 +14,7 @@ class CarFuelUpdateFra : CarFuelDetailFra() {
 
     override fun initViews() = with(binding) {
         super.initViews()
-        materialToolbar.title = "修改车辆加油记录"
+        materialToolbar.title = "修改加油记录"
         with(carFuel) {
             tvCarNo.text = carNo
             carId = carID
@@ -24,7 +24,6 @@ class CarFuelUpdateFra : CarFuelDetailFra() {
             etFuelAmount.setText(fuelAmount.toString())
             etPrice.setText(price.toString())
             etUserName.setText(userName)
-            // todo
             tvFuelUpTime.text = fuelUpTime.toDisplayFormat()
         }
     }

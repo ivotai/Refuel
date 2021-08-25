@@ -53,7 +53,8 @@ abstract class CarFuelDetailFra : RecognizeFra() {
             MaterialDialog(requireContext()).show {
                 dateTimePicker(requireFutureDateTime = true) { _, dateTime ->
                     tvFuelUpTime.text = dateTime.time.toDisplayFormat()
-7                }
+                    7
+                }
             }
         }
 
@@ -76,13 +77,23 @@ abstract class CarFuelDetailFra : RecognizeFra() {
             return@with
         }
 
-        // todo 检查 fuelUpTime 格式是否正确
+        try {
+            etUnitPrice.trimText().toDouble()
+            etFuelAmount.trimText().toDouble()
+            etPrice.trimText().toDouble()
+        } catch (e: Exception) {
+            "数字格式异常，请手动输入".toast()
+            return@with
+        }
 
         try {
-            submitX()
-        } catch (e: NumberFormatException) {
-            "数字格式异常".toast()
+            tvFuelUpTime.trimText().toDate()
+        } catch (e: Exception) {
+            "加油时间格式异常，请手动输入".toast()
+            return@with
         }
+
+        submitX()
     }
 
     abstract fun submitX()
