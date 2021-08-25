@@ -42,15 +42,17 @@ class CarFueFra : PageFra<CalFuelSelect>() {
     @SuppressLint("CheckResult")
     override fun initBindings() = with(binding) {
         super.initBindings()
-        materialToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
+        materialToolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
                 R.id.car_fuel_add -> {
                     startAct(CarFuelAddAct::class.java)
-                    true
+                    return@setOnMenuItemClickListener true
                 }
                 R.id.car_fuel_export_all -> {
-                    ToastUtils.showShort("成功导出全部记录")
-                    true
+                    // 导出全部并关闭选择模式
+                    ToastUtils.showShort("成功导出${pageAdapter.data.size}条记录")
+                    RxBus.post(ChangeSelectModeEvent(false))
+                    return@setOnMenuItemClickListener true
 
                 }
                 R.id.car_fuel_export_part -> {
@@ -58,12 +60,17 @@ class CarFueFra : PageFra<CalFuelSelect>() {
                     if (!inSelectMode) RxBus.post(ChangeSelectModeEvent(true))
                     else {
                         // 如果开启了，则导出部分数据并关闭选择模式
-                        ToastUtils.showShort("成功导出选中记录")
+                        val size = pageAdapter.data.filter { it.isSelected }.size
+                        if (size == 0) {
+                            ToastUtils.showShort("未选中一条记录")
+                            return@setOnMenuItemClickListener true
+                        }
+                        ToastUtils.showShort("成功导出${pageAdapter.data.filter { it.isSelected }.size}记录")
                         RxBus.post(ChangeSelectModeEvent(false))
                     }
-                    true
+                    return@setOnMenuItemClickListener true
                 }
-                else -> false
+                else -> return@setOnMenuItemClickListener false
             }
         }
         val menuItem = materialToolbar.menu.findItem(R.id.car_fuel_search)
@@ -91,8 +98,9 @@ class CarFueFra : PageFra<CalFuelSelect>() {
         RxBus.registerEvent(this, CarFuelRefreshEvent::class.java, {
             loadStartPage()
         })
-        RxBus.registerEvent(this, ChangeSelectModeEvent::class.java, {
-            inSelectMode = it.inSelectMode
+        RxBus.registerEvent(this, ChangeSelectModeEvent::class.java, { event ->
+            inSelectMode = event.inSelectMode
+            if (!inSelectMode) pageAdapter.data.forEach { it.isSelected = false }
             pageAdapter.notifyDataSetChanged()
         })
     }
