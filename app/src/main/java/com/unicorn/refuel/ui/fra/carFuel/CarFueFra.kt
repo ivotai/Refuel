@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.unicorn.refuel.R
 import com.unicorn.refuel.app.RxBus
+import com.unicorn.refuel.app.startAct
 import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
 import com.unicorn.refuel.data.event.CarFuelSearchEvent
@@ -17,6 +19,7 @@ import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
 import com.unicorn.refuel.data.model.param.carFuel.CarFuelListParam
 import com.unicorn.refuel.databinding.UiTitleSwipeBinding
+import com.unicorn.refuel.ui.act.CarFuelAddAct
 import com.unicorn.refuel.ui.adapter.CarFuelAdapter
 import com.unicorn.refuel.ui.fra.base.PageFra
 import io.reactivex.rxjava3.core.Single
@@ -33,9 +36,34 @@ class CarFueFra : PageFra<CarFuel>() {
         }
     }
 
-    private fun initBoomMenuButton() {
-//        startAct(CarFuelAddAct::class.java)
+    override fun initBindings() = with(binding) {
+        super.initBindings()
+        materialToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.car_fuel_add -> {
+                    startAct(CarFuelAddAct::class.java)
+                    true
+                }
+                R.id.car_fuel_export -> {
+                    true
+                }
+                else -> false
+            }
+        }
+        val menuItem = materialToolbar.menu.findItem(R.id.car_fuel_search)
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                RxBus.post(CarFuelSearchEvent(carNo = newText))
+                return true
+            }
+        })
     }
+
 
     override fun initEvents() {
         super.initEvents()
@@ -72,12 +100,12 @@ class CarFueFra : PageFra<CarFuel>() {
     override val mSwipeRefreshLayout: SwipeRefreshLayout
         get() = binding.swipeRefreshLayout
 
-    //
+//
 
     private var _binding: UiTitleSwipeBinding? = null
 
     // This property is only valid between onCreateView and
-    // onDestroyView.
+// onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

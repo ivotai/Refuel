@@ -2,15 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/add_car_fuel"
+        android:id="@+id/car_fuel_add"
         android:title="添加"
         app:showAsAction="never" />
     <item
-        android:id="@+id/search"
+        android:id="@+id/car_fuel_search"
         android:title="查询"
-        app:showAsAction="never" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/export"
+        android:id="@+id/car_fuel_export"
         android:title="导出"
         app:showAsAction="never" />
 </menu>
