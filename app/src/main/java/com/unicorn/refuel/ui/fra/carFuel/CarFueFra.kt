@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.refuel.R
 import com.unicorn.refuel.app.RxBus
+import com.unicorn.refuel.app.helper.ExportHelper
 import com.unicorn.refuel.app.inSelectMode
 import com.unicorn.refuel.app.startAct
 import com.unicorn.refuel.app.toBeanList
@@ -49,9 +50,8 @@ class CarFueFra : PageFra<CalFuelSelect>() {
                     return@setOnMenuItemClickListener true
                 }
                 R.id.car_fuel_export_all -> {
-                    // 导出全部并关闭选择模式
-                    ToastUtils.showShort("成功导出${pageAdapter.data.size}条记录")
-                    RxBus.post(ChangeSelectModeEvent(false))
+                    // 导出全部
+                    ExportHelper.exportCarFuels(pageAdapter.data.map { it.carFuel })
                     return@setOnMenuItemClickListener true
 
                 }
@@ -59,14 +59,14 @@ class CarFueFra : PageFra<CalFuelSelect>() {
                     // 如果没有开启选择模式，则开启选择模式
                     if (!inSelectMode) RxBus.post(ChangeSelectModeEvent(true))
                     else {
-                        // 如果开启了，则导出部分数据并关闭选择模式
+                        // 如果开启了，则导出部分
                         val size = pageAdapter.data.filter { it.isSelected }.size
                         if (size == 0) {
                             ToastUtils.showShort("未选中一条记录")
                             return@setOnMenuItemClickListener true
                         }
-                        ToastUtils.showShort("成功导出${pageAdapter.data.filter { it.isSelected }.size}记录")
-                        RxBus.post(ChangeSelectModeEvent(false))
+                        ExportHelper.exportCarFuels(pageAdapter.data.filter { it.isSelected }
+                            .map { it.carFuel })
                     }
                     return@setOnMenuItemClickListener true
                 }
