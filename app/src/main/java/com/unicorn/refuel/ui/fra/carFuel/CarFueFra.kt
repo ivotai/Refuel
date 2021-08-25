@@ -107,10 +107,6 @@ class CarFueFra : PageFra<CarFuel>() {
         })
     }
 
-    override fun addItemDecoration() {
-        // no item decoration
-    }
-
     override fun initPageAdapter() {
         pageAdapter = CarFuelAdapter()
     }

@@ -1,9 +1,7 @@
 package com.unicorn.refuel.ui.adapter
 
 import android.content.Intent
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -12,27 +10,19 @@ import com.unicorn.refuel.app.Param
 import com.unicorn.refuel.app.safeClicks
 import com.unicorn.refuel.app.toDisplayFormat
 import com.unicorn.refuel.data.model.CarFuel
-import com.unicorn.refuel.databinding.ItemCarFuelBinding
 import com.unicorn.refuel.ui.act.base.CarFuelUpdateAct
 
 
 class CarFuelAdapter : BaseQuickAdapter<CarFuel, BaseViewHolder>(R.layout.item_car_fuel),
     LoadMoreModule {
 
-    lateinit var binding: ItemCarFuelBinding
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        binding = ItemCarFuelBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return super.onCreateViewHolder(parent, viewType)
-    }
-
     override fun convert(holder: BaseViewHolder, item: CarFuel) {
         holder.apply {
             with(item) {
-                setText(
-                    R.id.textView,
-                    "${carNo}于${fuelUpTime.toDisplayFormat()}加油${fuelAmount}升，花费${price}元"
-                )
+                setText(R.id.tvFuelUpTime, fuelUpTime.toDisplayFormat())
+                setText(R.id.tvCarNo, carNo)
+                setText(R.id.tvFuelAmount, "${fuelAmount}升")
+                setText(R.id.tvPrice, price.toString())
                 getView<View>(R.id.root).safeClicks().subscribe {
                     Intent(context, CarFuelUpdateAct::class.java).apply {
                         putExtra(Param, item)
