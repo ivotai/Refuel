@@ -1,5 +1,6 @@
 package com.unicorn.refuel.ui.fra.carFuel
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItems
 import com.unicorn.refuel.R
 import com.unicorn.refuel.app.RxBus
+import com.unicorn.refuel.app.inSelectMode
 import com.unicorn.refuel.app.startAct
 import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
@@ -32,10 +36,10 @@ class CarFueFra : PageFra<CarFuel>() {
         with(materialToolbar) {
             title = "车辆加油"
             inflateMenu(R.menu.menu_car_fuel)
-//            menu.clear()
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun initBindings() = with(binding) {
         super.initBindings()
         materialToolbar.setOnMenuItemClickListener {
@@ -45,6 +49,18 @@ class CarFueFra : PageFra<CarFuel>() {
                     true
                 }
                 R.id.car_fuel_export -> {
+                    MaterialDialog(requireContext()).show {
+                        listItems(items = listOf("导出全部", "导出部分")) { _, index, _ ->
+                            if (index == 0) {
+                                // todo export all cool!
+                            } else {
+                                if (!inSelectMode) startSelectMode()
+                                else {
+                                    // todo export selects
+                                }
+                            }
+                        }
+                    }
                     true
                 }
                 else -> false
@@ -52,6 +68,7 @@ class CarFueFra : PageFra<CarFuel>() {
         }
         val menuItem = materialToolbar.menu.findItem(R.id.car_fuel_search)
         val searchView = menuItem.actionView as SearchView
+        searchView.queryHint = "输入车牌号"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -64,6 +81,11 @@ class CarFueFra : PageFra<CarFuel>() {
         })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun startSelectMode() {
+        inSelectMode = true
+        pageAdapter.notifyDataSetChanged()
+    }
 
     override fun initEvents() {
         super.initEvents()

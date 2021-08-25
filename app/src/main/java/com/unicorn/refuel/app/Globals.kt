@@ -7,3 +7,5 @@ val uid: String get() = loggedUser.uid
 lateinit var loggedUser: LoggedUser
 
 var isLogin = false
+
+var inSelectMode = false
