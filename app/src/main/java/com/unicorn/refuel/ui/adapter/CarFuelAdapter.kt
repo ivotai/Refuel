@@ -31,7 +31,7 @@ class CarFuelAdapter : BaseQuickAdapter<CarFuel, BaseViewHolder>(R.layout.item_c
             with(item) {
                 setText(
                     R.id.textView,
-                    "${carNo}于${createdServerTime.toDisplayFormat()}加油${fuelAmount}升，花费${price}元"
+                    "${carNo}于${fuelUpTime.toDisplayFormat()}加油${fuelAmount}升，花费${price}元"
                 )
                 getView<View>(R.id.root).safeClicks().subscribe {
                     Intent(context, CarFuelUpdateAct::class.java).apply {

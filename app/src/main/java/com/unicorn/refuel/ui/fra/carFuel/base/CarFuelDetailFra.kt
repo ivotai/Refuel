@@ -93,6 +93,9 @@ abstract class CarFuelDetailFra : RecognizeFra() {
             if (it.contains("应付")) {
                 etPrice.setText(it.removePrefix("应付:").removeSuffix("元"))
             }
+            if (it.contains("交易时间")) {
+                tvFuelUpTime.text = it.removePrefix("交易时间:")
+            }
         }
     }
 

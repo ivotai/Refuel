@@ -263,6 +263,43 @@
         app:layout_constraintTop_toTopOf="@+id/lUserName"
         tools:ignore="TextFields" />
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lUserName"
+        app:layout_constraintTop_toBottomOf="@+id/lUserName" />
+
+    <TextView
+        android:id="@+id/lFuelUpTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="加油时间"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider7"
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+    <TextView
+        android:id="@+id/tvFuelUpTime"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:hint="选择加油时间"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lFuelUpTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lFuelUpTime"
+        app:layout_constraintTop_toTopOf="@+id/lFuelUpTime"
+        tools:ignore="TextFields" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_recognize"
         style="?attr/materialButtonOutlinedStyle"
@@ -276,7 +313,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/lFuelUpTime" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSubmit"

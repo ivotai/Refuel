@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleCentered="true"
-        app:title="加油小票" />
+        app:title="车辆管理" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

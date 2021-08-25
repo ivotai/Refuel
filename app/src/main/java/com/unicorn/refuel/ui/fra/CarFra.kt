@@ -44,10 +44,7 @@ class CarFra : PageFra<Car>() {
                     searchParam = CarListParam()
                 )
             )
-        ).doOnSuccess {
-            it.items = it.itemsJson.toBeanList()
-            it
-        }
+        ).doOnSuccess { it.items = it.itemsJson.toBeanList() }
 
     override val mRecyclerView: RecyclerView
         get() = binding.recyclerView
