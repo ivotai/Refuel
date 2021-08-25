@@ -25,6 +25,7 @@ import com.unicorn.refuel.app.*
 import com.unicorn.refuel.app.third.FileUtil
 import com.unicorn.refuel.app.third.RecognizeService
 import com.unicorn.refuel.data.event.CarSelectEvent
+import com.unicorn.refuel.data.model.RecognizeResult
 import com.unicorn.refuel.databinding.FraCarFuelDetailBinding
 import com.unicorn.refuel.ui.act.CarAct
 import com.unicorn.refuel.ui.fra.base.BaseFra
@@ -55,8 +56,26 @@ class CarFuelAddFra : BaseFra() {
         btnRecognize.safeClicks().subscribe { recognize() }
     }
 
-    private fun s(json: String) {
-        json.toast()
+    //
+    private fun onRecognize(result: String) = with(binding) {
+        val recognizeResult = result.toBean<RecognizeResult>()
+        recognizeResult.words_result.map { it.words }.forEach {
+            if (it.contains("卡号")) {
+                etFuelCardNo.setText(it.removePrefix("卡号:"))
+            }
+            if (it.contains("油品代码")) {
+                etFuelLabelNumber.setText(it.removePrefix("油品代码:"))
+            }
+            if (it.contains("单价")) {
+                etUnitPrice.setText(it.removePrefix("单价:").removeSuffix("元/升"))
+            }
+            if (it.contains("加油升数")) {
+                etFuelAmount.setText(it.removePrefix("加油升数:").removeSuffix("升"))
+            }
+            if (it.contains("应付")) {
+                etPrice.setText(it.removePrefix("应付:").removeSuffix("元"))
+            }
+        }
     }
 
     //
@@ -153,7 +172,7 @@ class CarFuelAddFra : BaseFra() {
                 RecognizeService.recognizeGeneralBasic(
                     requireContext(),
                     FileUtil.getSaveFile(requireContext()).absolutePath
-                ) { result -> s(json = result) }
+                ) { result -> onRecognize(result = result) }
             }
 
         return binding.root
