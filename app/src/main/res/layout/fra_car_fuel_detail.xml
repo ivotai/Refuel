@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,8 +13,287 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="车辆加油详情"
+        app:title="新增车辆加油记录"
         app:titleCentered="true" />
 
+    <TextView
+        android:id="@+id/lCarNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="车牌号"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+
+    <EditText
+        android:id="@+id/etCarNo"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:enabled="false"
+        android:gravity="end"
+        android:hint="选择车辆"
+        android:inputType="text"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lCarNo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lCarNo"
+        app:layout_constraintTop_toTopOf="@+id/lCarNo" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lCarNo"
+        app:layout_constraintTop_toBottomOf="@+id/lCarNo" />
+
+    <TextView
+        android:id="@+id/lFuelCardNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="油卡卡号"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+    <EditText
+        android:id="@+id/etFuelCardNo"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:inputType="text"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lFuelCardNo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lFuelCardNo"
+        app:layout_constraintTop_toTopOf="@+id/lFuelCardNo" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lFuelCardNo"
+        app:layout_constraintTop_toBottomOf="@+id/lFuelCardNo" />
+
+    <TextView
+        android:id="@+id/lFuelLabelNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="油品代码"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <EditText
+        android:id="@+id/etFuelLabelNumber"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:inputType="text"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lFuelLabelNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lFuelLabelNumber"
+        app:layout_constraintTop_toTopOf="@+id/lFuelLabelNumber"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lFuelLabelNumber"
+        app:layout_constraintTop_toBottomOf="@+id/lFuelLabelNumber" />
+
+    <TextView
+        android:id="@+id/lUnitPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="单价（元/升）"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <EditText
+        android:id="@+id/etUnitPrice"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lUnitPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lUnitPrice"
+        app:layout_constraintTop_toTopOf="@+id/lUnitPrice"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lUnitPrice"
+        app:layout_constraintTop_toBottomOf="@+id/lUnitPrice" />
+
+    <TextView
+        android:id="@+id/lFuelAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="加油升数（升）"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider4"
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+    <EditText
+        android:id="@+id/etFuelAmount"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lFuelAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lFuelAmount"
+        app:layout_constraintTop_toTopOf="@+id/lFuelAmount"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lFuelAmount"
+        app:layout_constraintTop_toBottomOf="@+id/lFuelAmount" />
+
+    <TextView
+        android:id="@+id/lPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="总金额（元）"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider5"
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lPrice"
+        app:layout_constraintTop_toTopOf="@+id/lPrice"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerThickness="1px"
+        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintStart_toStartOf="@+id/lPrice"
+        app:layout_constraintTop_toBottomOf="@+id/lPrice" />
+
+    <TextView
+        android:id="@+id/lUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="加油人"
+        android:textColor="@color/md_grey_700"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/divider6"
+        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+    <EditText
+        android:id="@+id/etUserName"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        android:textColor="@color/md_grey_900"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lUserName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lUserName"
+        app:layout_constraintTop_toTopOf="@+id/lUserName"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnScan"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="拍摄小票"
+        style="?attr/materialButtonOutlinedStyle"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lUserName" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="提交"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnScan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btnScan"
+        app:layout_constraintTop_toTopOf="@+id/btnScan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

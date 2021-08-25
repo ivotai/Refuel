@@ -28,6 +28,7 @@ import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
 import com.unicorn.refuel.data.model.param.CarFuelListParam
 import com.unicorn.refuel.databinding.FraCarFuelBinding
+import com.unicorn.refuel.ui.act.CarFuelAddAct
 import com.unicorn.refuel.ui.adapter.CarFuelAdapter
 import com.unicorn.refuel.ui.fra.base.PageFra
 import io.reactivex.rxjava3.core.Single
@@ -59,7 +60,7 @@ class CarFueFra : PageFra<CarFuel>() {
                 .normalText("新增车辆加油记录")
                 .subNormalText("创建一条新的车辆加油记录")
                 .listener {
-                    "T".toast()
+                    startAct(CarFuelAddAct::class.java)
                 }
                 .shadowRadius(ConvertUtils.dp2px(1f))
                 .let { addBuilder(it) }
@@ -67,6 +68,7 @@ class CarFueFra : PageFra<CarFuel>() {
             HamButton.Builder()
                 .normalTextColor(requireContext().getColorFromAttr(com.unicorn.refuel.R.attr.colorPrimary))
                 .normalColor(android.graphics.Color.WHITE)
+                .highlightedColor(getAttrColor(R.attr.colorPrimary))
                 .subNormalTextColor(requireContext().getColorFromAttr(com.unicorn.refuel.R.attr.colorPrimary))
                 .normalText("查询车辆加油记录")
                 .subNormalText("输入车牌号查询车辆加油记录，支持模糊查询")
@@ -75,7 +77,7 @@ class CarFueFra : PageFra<CarFuel>() {
                         input(allowEmpty = true, hint = "输入车牌号") { _, text ->
                             RxBus.post(CarFueSearchEvent(carNo = text.toString()))
                         }
-                        positiveButton(text = "确认")
+                        positiveButton(text = "查询")
                     }
                 }
                 .shadowRadius(ConvertUtils.dp2px(1f))
@@ -84,6 +86,7 @@ class CarFueFra : PageFra<CarFuel>() {
             HamButton.Builder()
                 .normalTextColor(requireContext().getColorFromAttr(com.unicorn.refuel.R.attr.colorPrimary))
                 .normalColor(android.graphics.Color.WHITE)
+                .highlightedColor(getAttrColor(R.attr.colorPrimary))
                 .subNormalTextColor(requireContext().getColorFromAttr(com.unicorn.refuel.R.attr.colorPrimary))
                 .normalText("分享车辆加油记录")
                 .subNormalText("将车辆加油记录导出成 Excel 并分享")

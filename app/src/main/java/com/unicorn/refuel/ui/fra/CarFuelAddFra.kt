@@ -12,6 +12,9 @@ import com.baidu.ocr.sdk.OnResultListener
 import com.baidu.ocr.sdk.exception.OCRError
 import com.baidu.ocr.sdk.model.AccessToken
 import com.baidu.ocr.ui.camera.CameraActivity
+import com.mikepenz.iconics.IconicsDrawable
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
+import com.mikepenz.iconics.utils.sizeDp
 import com.unicorn.refuel.app.safeClicks
 import com.unicorn.refuel.app.third.FileUtil
 import com.unicorn.refuel.app.third.RecognizeService
@@ -27,6 +30,10 @@ class CarFuelAddFra : BaseFra() {
 
         binding.materialToolbar.safeClicks().subscribe {
             recognize()
+        }
+
+        binding.btnScan.icon = IconicsDrawable(requireContext(), FontAwesome.Icon.faw_image1).apply {
+            sizeDp = 24
         }
     }
 
@@ -81,7 +88,8 @@ class CarFuelAddFra : BaseFra() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 2333 && resultCode == Activity.RESULT_OK) {
-            RecognizeService.recognizeGeneralBasic(requireContext(),
+            RecognizeService.recognizeGeneralBasic(
+                requireContext(),
                 FileUtil.getSaveFile(requireContext()).absolutePath
             ) { result -> result?.toast() }
 
