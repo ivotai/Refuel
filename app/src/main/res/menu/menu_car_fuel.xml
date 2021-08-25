@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/action_settings"
-        android:title="添加车辆加油记录"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/add_car_fuel"
+        android:title="添加"
+        app:showAsAction="never" />
     <item
-        android:id="@+id/action_done"
-        android:title="进入导出模式"
-        app:showAsAction="ifRoom|withText" />
-
+        android:id="@+id/search"
+        android:title="查询"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/export"
+        android:title="导出"
+        app:showAsAction="never" />
 </menu>

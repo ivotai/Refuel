@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.unicorn.refuel.R
 import com.unicorn.refuel.app.RxBus
 import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
@@ -25,7 +26,11 @@ class CarFueFra : PageFra<CarFuel>() {
 
     override fun initViews() = with(binding) {
         super.initViews()
-        materialToolbar.title = "车辆加油"
+        with(materialToolbar) {
+            title = "车辆加油"
+            inflateMenu(R.menu.menu_car_fuel)
+//            menu.clear()
+        }
     }
 
     private fun initBoomMenuButton() {
