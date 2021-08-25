@@ -59,11 +59,14 @@ abstract class CarFuelDetailFra : RecognizeFra() {
             etUnitPrice.isEmpty() ||
             etFuelAmount.isEmpty() ||
             etPrice.isEmpty() ||
-            etUserName.isEmpty()
+            etUserName.isEmpty() ||
+            tvFuelUpTime.isEmpty()
         ) {
             "请输入所有信息".toast()
             return@with
         }
+
+        // todo 检查 fuelUpTime 格式是否正确
 
         try {
             submitX()
