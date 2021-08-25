@@ -117,11 +117,14 @@ class CarFueFra : PageFra<CarFuel>() {
 
     private var carNo = ""
 
+    override val pageSize: Int = 10000
+
     override fun loadPage(page: Int): Single<PageResponse<CarFuel>> =
         api.getCarFuelList(
             EncryptionRequest.create(
                 PageRequest(
                     pageNo = page,
+                    pageSize = pageSize,
                     searchParam = CarFuelListParam(carNo = carNo)
                 )
             )
