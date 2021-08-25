@@ -10,6 +10,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.blankj.utilcode.util.ConvertUtils
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
@@ -18,10 +20,8 @@ import com.nightonke.boommenu.BoomButtons.HamButton
 import com.nightonke.boommenu.ButtonEnum
 import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import com.unicorn.refuel.R
-import com.unicorn.refuel.app.getAttrColor
-import com.unicorn.refuel.app.getColorFromAttr
-import com.unicorn.refuel.app.toBeanList
-import com.unicorn.refuel.app.toast
+import com.unicorn.refuel.app.*
+import com.unicorn.refuel.data.event.CarFueSearchEvent
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
@@ -40,6 +40,7 @@ class CarFueFra : PageFra<CarFuel>() {
         initBoomMenuButton()
     }
 
+    @SuppressLint("CheckResult")
     private fun initBoomMenuButton() {
         with(binding.boomMenuButton) {
             buttonEnum = ButtonEnum.Ham
@@ -68,9 +69,14 @@ class CarFueFra : PageFra<CarFuel>() {
                 .normalColor(android.graphics.Color.WHITE)
                 .subNormalTextColor(requireContext().getColorFromAttr(com.unicorn.refuel.R.attr.colorPrimary))
                 .normalText("查询车辆加油记录")
-                .subNormalText("按照车牌号查询车辆加油记录")
+                .subNormalText("输入车牌号查询车辆加油记录，支持模糊查询")
                 .listener {
-                    "T".toast()
+                    MaterialDialog(requireContext()).show {
+                        input(allowEmpty = true, hint = "输入车牌号") { _, text ->
+                            RxBus.post(CarFueSearchEvent(carNo = text.toString()))
+                        }
+                        positiveButton(text = "确认")
+                    }
                 }
                 .shadowRadius(ConvertUtils.dp2px(1f))
                 .let { addBuilder(it) }
@@ -108,6 +114,14 @@ class CarFueFra : PageFra<CarFuel>() {
 
     }
 
+    override fun initEvents() {
+        super.initEvents()
+        RxBus.registerEvent(this, CarFueSearchEvent::class.java, {
+            this.carNo = it.carNo
+            loadStartPage()
+        })
+    }
+
     private fun scanCode() {
         activityResultLauncher.launch(Intent(context, CaptureActivity::class.java))
     }
@@ -120,12 +134,14 @@ class CarFueFra : PageFra<CarFuel>() {
         pageAdapter = CarFuelAdapter()
     }
 
+    private var carNo = ""
+
     override fun loadPage(page: Int): Single<PageResponse<CarFuel>> =
         api.getCarFuelList(
             EncryptionRequest.create(
                 PageRequest(
                     pageNo = page,
-                    searchParam = CarFuelListParam()
+                    searchParam = CarFuelListParam(carNo = carNo)
                 )
             )
         ).doOnSuccess { it.items = it.itemsJson.toBeanList() }
