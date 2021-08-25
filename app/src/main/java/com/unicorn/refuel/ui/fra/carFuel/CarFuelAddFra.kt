@@ -5,8 +5,14 @@ import com.unicorn.refuel.app.*
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.param.carFuel.CarFuelAddParam
+import com.unicorn.refuel.ui.fra.carFuel.base.CarFuelDetailFra
 
 class CarFuelAddFra : CarFuelDetailFra() {
+
+    override fun initViews():Unit = with(binding) {
+        super.initViews()
+        materialToolbar.title = "添加车辆加油记录"
+    }
 
     override fun submitX(): Unit = with(binding) {
         val carFuelAddParam = CarFuelAddParam(

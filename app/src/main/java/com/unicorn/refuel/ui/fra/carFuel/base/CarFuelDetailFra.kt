@@ -1,4 +1,4 @@
-package com.unicorn.refuel.ui.fra.carFuel
+package com.unicorn.refuel.ui.fra.carFuel.base
 
 import android.annotation.SuppressLint
 import android.content.Intent

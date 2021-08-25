@@ -53,7 +53,7 @@ class CarFueFra : PageFra<CarFuel>() {
                 .normalColor(android.graphics.Color.WHITE)
                 .highlightedColor(getAttrColor(R.attr.colorPrimary))
                 .subNormalTextColor(requireContext().getColorFromAttr(R.attr.colorPrimary))
-                .normalText("新增车辆加油记录")
+                .normalText("添加车辆加油记录")
                 .subNormalText("创建一条新的车辆加油记录")
                 .listener {
                     startAct(CarFuelAddAct::class.java)

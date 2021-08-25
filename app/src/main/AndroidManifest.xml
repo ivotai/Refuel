@@ -4,9 +4,9 @@
     package="com.unicorn.refuel">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.App"
@@ -30,6 +30,7 @@
         <activity android:name=".ui.act.MainAct" />
         <activity android:name=".ui.act.CarAct" />
         <activity android:name=".ui.act.CarFuelAddAct" />
+        <activity android:name=".ui.act.base.CarFuelUpdateAct" />
 
         <activity
             android:name="com.king.zxing.CaptureActivity"

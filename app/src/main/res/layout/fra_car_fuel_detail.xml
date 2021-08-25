@@ -13,7 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="新增车辆加油记录"
         app:titleCentered="true" />
 
     <TextView
@@ -266,12 +265,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_recognize"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="拍摄小票"
-        style="?attr/materialButtonOutlinedStyle"
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
         app:layout_constraintHorizontal_bias="0.5"
