@@ -255,7 +255,7 @@
         android:layout_marginEnd="16dp"
         android:background="@null"
         android:gravity="end"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:textColor="@color/md_grey_900"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/lUserName"

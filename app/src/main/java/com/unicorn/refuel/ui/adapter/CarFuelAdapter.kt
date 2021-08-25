@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.unicorn.refuel.R
-import com.unicorn.refuel.app.toDisplayDateFormat
+import com.unicorn.refuel.app.toDisplayFormat
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.databinding.ItemCarFuelBinding
 
@@ -24,7 +24,7 @@ class CarFuelAdapter : BaseQuickAdapter<CarFuel, BaseViewHolder>(R.layout.item_c
     override fun convert(holder: BaseViewHolder, item: CarFuel) {
         holder.apply {
             with(item){
-                setText(R.id.textView,"${carNo}于${createdServerTime.toDisplayDateFormat()}加油${fuelAmount}升，花费${price}元")
+                setText(R.id.textView,"${carNo}于${createdServerTime.toDisplayFormat()}加油${fuelAmount}升，花费${price}元")
             }
         }
     }

@@ -21,7 +21,8 @@ import com.nightonke.boommenu.ButtonEnum
 import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import com.unicorn.refuel.R
 import com.unicorn.refuel.app.*
-import com.unicorn.refuel.data.event.CarFueSearchEvent
+import com.unicorn.refuel.data.event.CarFuelRefreshEvent
+import com.unicorn.refuel.data.event.CarFuelSearchEvent
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
@@ -75,7 +76,7 @@ class CarFueFra : PageFra<CarFuel>() {
                 .listener {
                     MaterialDialog(requireContext()).show {
                         input(allowEmpty = true, hint = "输入车牌号") { _, text ->
-                            RxBus.post(CarFueSearchEvent(carNo = text.toString()))
+                            RxBus.post(CarFuelSearchEvent(carNo = text.toString()))
                         }
                         positiveButton(text = "查询")
                     }
@@ -99,34 +100,16 @@ class CarFueFra : PageFra<CarFuel>() {
         }
     }
 
-    @SuppressLint("CheckResult")
-    override fun initBindings(): Unit = with(binding) {
-        super.initBindings()
-
-//            startAct(CarFuelAddAct::class.java)
-//            MaterialDialog(requireContext()).show {
-//                title(text = "选择加油车辆")
-//                listItems(items = listOf("车辆扫码", "车辆列表选择")) { _, index, _ ->
-//                    if (index == 0) {
-//                        scanCode()
-//                    } else {
-//                        startAct(CarAct::class.java)
-//                    }
-//                }
-//            }
-
-    }
 
     override fun initEvents() {
         super.initEvents()
-        RxBus.registerEvent(this, CarFueSearchEvent::class.java, {
+        RxBus.registerEvent(this, CarFuelSearchEvent::class.java, {
             this.carNo = it.carNo
             loadStartPage()
         })
-    }
-
-    private fun scanCode() {
-        activityResultLauncher.launch(Intent(context, CaptureActivity::class.java))
+        RxBus.registerEvent(this, CarFuelRefreshEvent::class.java, {
+            loadStartPage()
+        })
     }
 
     override fun addItemDecoration() {
@@ -168,17 +151,8 @@ class CarFueFra : PageFra<CarFuel>() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FraCarFuelBinding.inflate(inflater, container, false)
-
-        activityResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                val carId = CameraScan.parseScanResult(it.data)
-                carId.toast()
-            }
-
         return binding.root
     }
-
-    lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onDestroyView() {
         super.onDestroyView()

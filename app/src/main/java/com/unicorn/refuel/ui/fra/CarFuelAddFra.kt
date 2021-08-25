@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.afollestad.materialdialogs.MaterialDialog
@@ -21,11 +20,16 @@ import com.king.zxing.CaptureActivity
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.utils.sizeDp
+import com.rxjava.rxlife.lifeOnMain
 import com.unicorn.refuel.app.*
 import com.unicorn.refuel.app.third.FileUtil
 import com.unicorn.refuel.app.third.RecognizeService
+import com.unicorn.refuel.data.event.CarFuelRefreshEvent
 import com.unicorn.refuel.data.event.CarSelectEvent
+import com.unicorn.refuel.data.model.Car
 import com.unicorn.refuel.data.model.RecognizeResult
+import com.unicorn.refuel.data.model.base.EncryptionRequest
+import com.unicorn.refuel.data.model.param.CarFuelAddParam
 import com.unicorn.refuel.databinding.FraCarFuelDetailBinding
 import com.unicorn.refuel.ui.act.CarAct
 import com.unicorn.refuel.ui.fra.base.BaseFra
@@ -46,6 +50,7 @@ class CarFuelAddFra : BaseFra() {
 
         tvCarNo.safeClicks().subscribe {
             MaterialDialog(requireContext()).show {
+                title(text = "选择车辆")
                 listItems(items = listOf("扫码选择", "列表选择")) { _, index, _ ->
                     if (index == 0) scanCarCode()
                     else startAct(CarAct::class.java)
@@ -54,6 +59,56 @@ class CarFuelAddFra : BaseFra() {
         }
 
         btnRecognize.safeClicks().subscribe { recognize() }
+
+        btnSubmit.safeClicks().subscribe { addCarFuelX() }
+    }
+
+    private fun addCarFuelX() = with(binding) {
+        if (tvCarNo.isEmpty() ||
+            etFuelCardNo.isEmpty() ||
+            etFuelLabelNumber.isEmpty() ||
+            etUnitPrice.isEmpty() ||
+            etFuelAmount.isEmpty() ||
+            etPrice.isEmpty() ||
+            etUserName.isEmpty()
+        ) {
+            "请输入所有信息".toast()
+            return@with
+        }
+
+        try {
+            addCarFuel()
+        } catch (e: NumberFormatException) {
+            "数字格式异常".toast()
+        }
+    }
+
+    private fun addCarFuel() = with(binding) {
+        val carFuelAddParam = CarFuelAddParam(
+            carID = carId!!,
+            fuelCardNo = etFuelCardNo.trimText(),
+            fuelLabelNumber = etFuelLabelNumber.trimText(),
+            unitPrice = etUnitPrice.trimText().toDouble(),
+            fuelAmount = etFuelAmount.trimText().toDouble(),
+            price = etPrice.trimText().toDouble(),
+            userName = etUserName.trimText()
+        )
+        btnSubmit.isEnabled = false
+        api.addCarFuel(EncryptionRequest.create(carFuelAddParam))
+            .lifeOnMain(this@CarFuelAddFra)
+            .subscribe(
+                {
+                    btnSubmit.isEnabled = true
+                    if (it.failed) return@subscribe
+                    "新增记录成功".toast()
+                    RxBus.post(CarFuelRefreshEvent())
+                    finishAct()
+                },
+                {
+                    btnSubmit.isEnabled = true
+                    it.errorMsg().toast()
+                }
+            )
     }
 
     //
@@ -88,15 +143,19 @@ class CarFuelAddFra : BaseFra() {
 
     override fun initEvents() = with(binding) {
         RxBus.registerEvent(this@CarFuelAddFra, CarSelectEvent::class.java, {
-            tvCarNo.text = it.car.no
-            this@CarFuelAddFra.carId = it.car.id
+            onCar(it.car)
         })
+    }
+
+    private fun onCar(car: Car) = with(binding) {
+        tvCarNo.text = car.no
+        this@CarFuelAddFra.carId = car.id
     }
 
     //
 
     private fun recognize() {
-        if (!checkTokenStatus()) {
+        if (!hasGotToken) {
             return
         }
         val intent = Intent(requireContext(), CameraActivity::class.java)
@@ -109,13 +168,6 @@ class CarFuelAddFra : BaseFra() {
             CameraActivity.CONTENT_TYPE_GENERAL
         )
         launcherRecognize.launch(intent)
-    }
-
-    private fun checkTokenStatus(): Boolean {
-        if (!hasGotToken) {
-            Toast.makeText(requireContext(), "token还未成功获取", Toast.LENGTH_LONG).show()
-        }
-        return hasGotToken
     }
 
     private var hasGotToken = false
@@ -162,8 +214,8 @@ class CarFuelAddFra : BaseFra() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.data == null) return@registerForActivityResult
                 val json = CameraScan.parseScanResult(it.data)
-                // todo
-                json.toast()
+                val car = SimpleComponent().gson.fromJson(json, Car::class.java)
+                onCar(car)
             }
 
         launcherRecognize =

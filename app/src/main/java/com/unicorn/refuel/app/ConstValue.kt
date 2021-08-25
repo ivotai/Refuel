@@ -14,6 +14,8 @@ const val Param = "Param"
 
 const val displayDateFormat = "yyyy年MM月dd日"
 
+const val transferDateFormat = "yyyy-MM-dd HH:mm:ss"
+
 const val defaultPageSize = 10
 
 const val timeout = 20000L

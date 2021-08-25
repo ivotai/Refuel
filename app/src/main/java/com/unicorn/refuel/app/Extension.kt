@@ -81,9 +81,11 @@ fun RecyclerView.addDefaultItemDecoration() {
 
 fun Fragment.finishAct() = this.requireActivity().finish()
 
-fun Long.toDisplayDateFormat(): String = DateTime(this).toString(displayDateFormat)
+fun Long.toDisplayFormat(): String = DateTime(this).toString(displayDateFormat)
 
-fun Date.toDisplayDateFormat(): String = DateTime(this).toString(displayDateFormat)
+fun Date.toDisplayFormat(): String = DateTime(this).toString(displayDateFormat)
+
+fun Date.toTransferFormat(): String = DateTime(this).toString(transferDateFormat)
 
 // https://www.jianshu.com/p/ea63991fbc05
 inline fun <reified T> String.toBeanList(): List<T> =

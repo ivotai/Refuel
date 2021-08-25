@@ -12,6 +12,7 @@ import com.mikepenz.iconics.utils.sizeDp
 import com.rxjava.rxlife.lifeOnMain
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.unicorn.refuel.app.*
+import com.unicorn.refuel.app.helper.EncryptionHelper
 import com.unicorn.refuel.data.model.param.UserLoginParam
 import com.unicorn.refuel.databinding.FraLoginBinding
 import com.unicorn.refuel.ui.act.MainAct

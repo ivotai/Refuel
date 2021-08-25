@@ -22,4 +22,7 @@ interface SimpleApi {
     @POST("Maintenance/CarList")
     fun getCarlList(@Body encryptionRequest: EncryptionRequest): Single<PageResponse<Car>>
 
+    @POST("Maintenance/CarFuelAdd")
+    fun addCarFuel(@Body encryptionRequest: EncryptionRequest): Single<BaseResponse<CarFuel>>
+
 }
