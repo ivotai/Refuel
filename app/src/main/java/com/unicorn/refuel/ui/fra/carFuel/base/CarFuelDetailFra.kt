@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.datetime.dateTimePicker
 import com.afollestad.materialdialogs.list.listItems
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
@@ -24,6 +25,7 @@ import com.unicorn.refuel.data.model.RecognizeResult
 import com.unicorn.refuel.databinding.FraCarFuelDetailBinding
 import com.unicorn.refuel.ui.act.CarAct
 import com.unicorn.refuel.ui.fra.base.RecognizeFra
+import java.util.*
 
 abstract class CarFuelDetailFra : RecognizeFra() {
 
@@ -44,6 +46,14 @@ abstract class CarFuelDetailFra : RecognizeFra() {
                     if (index == 0) scanCarCode()
                     else startAct(CarAct::class.java)
                 }
+            }
+        }
+
+        tvFuelUpTime.safeClicks().subscribe {
+            MaterialDialog(requireContext()).show {
+                dateTimePicker(requireFutureDateTime = true) { _, dateTime ->
+                    tvFuelUpTime.text = dateTime.time.toDisplayFormat()
+7                }
             }
         }
 

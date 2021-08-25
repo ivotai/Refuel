@@ -3,7 +3,6 @@
 
 // todo 可能（加油记录每行显示车牌号、加油升数、总金额、加油日期）
 
-// todo 日期时间控件
 // todo 日期格式验证
 // todo 列表可以勾选、全选并导出excel 导出分享
 // todo action mode
