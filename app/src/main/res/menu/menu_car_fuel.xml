@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="添加车辆加油记录"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_done"
+        android:title="进入导出模式"
+        app:showAsAction="ifRoom|withText" />
+
+</menu>
