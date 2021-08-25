@@ -29,7 +29,6 @@ abstract class RecognizeFra : BaseFra() {
     private fun initAccessToken() {
         OCR.getInstance(requireContext()).initAccessToken(object : OnResultListener<AccessToken> {
             override fun onResult(result: AccessToken?) {
-                "文字识别初始化成功".toast()
                 hasGotToken = true
             }
 
