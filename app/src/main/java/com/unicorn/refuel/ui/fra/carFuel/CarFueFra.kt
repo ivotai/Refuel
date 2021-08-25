@@ -17,7 +17,7 @@ import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
 import com.unicorn.refuel.data.event.CarFuelSearchEvent
 import com.unicorn.refuel.data.event.ChangeSelectModeEvent
-import com.unicorn.refuel.data.model.CarFuel
+import com.unicorn.refuel.data.model.CalFuelSelect
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
@@ -29,7 +29,7 @@ import com.unicorn.refuel.ui.fra.base.PageFra
 import io.reactivex.rxjava3.core.Single
 
 
-class CarFueFra : PageFra<CarFuel>() {
+class CarFueFra : PageFra<CalFuelSelect>() {
 
     override fun initViews() = with(binding) {
         super.initViews()
@@ -105,7 +105,7 @@ class CarFueFra : PageFra<CarFuel>() {
 
     override val pageSize: Int = 10000
 
-    override fun loadPage(page: Int): Single<PageResponse<CarFuel>> =
+    override fun loadPage(page: Int): Single<PageResponse<CalFuelSelect>> =
         api.getCarFuelList(
             EncryptionRequest.create(
                 PageRequest(
@@ -114,7 +114,17 @@ class CarFueFra : PageFra<CarFuel>() {
                     searchParam = CarFuelListParam(carNo = carNo)
                 )
             )
-        ).doOnSuccess { it.items = it.itemsJson.toBeanList() }
+        )
+            .doOnSuccess { it.items = it.itemsJson.toBeanList() }
+            .map { pageResponse ->
+                return@map PageResponse(
+                    success = pageResponse.success,
+                    errorMsg = pageResponse.errorMsg,
+                    total = pageResponse.total,
+                    items = pageResponse.items!!.map { CalFuelSelect(carFuel = it) },
+                    encryptionData = pageResponse.encryptionData
+                )
+            }
 
     override val mRecyclerView: RecyclerView
         get() = binding.recyclerView

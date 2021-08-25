@@ -11,16 +11,17 @@ import com.unicorn.refuel.app.Param
 import com.unicorn.refuel.app.inSelectMode
 import com.unicorn.refuel.app.safeClicks
 import com.unicorn.refuel.app.toDisplayFormat
+import com.unicorn.refuel.data.model.CalFuelSelect
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.ui.act.base.CarFuelUpdateAct
 
 
-class CarFuelAdapter : BaseQuickAdapter<CarFuel, BaseViewHolder>(R.layout.item_car_fuel),
+class CarFuelAdapter : BaseQuickAdapter<CalFuelSelect, BaseViewHolder>(R.layout.item_car_fuel),
     LoadMoreModule {
 
-    override fun convert(holder: BaseViewHolder, item: CarFuel) {
+    override fun convert(holder: BaseViewHolder, item: CalFuelSelect) {
         holder.apply {
-            with(item) {
+            with(item.carFuel) {
                 val radioButton = holder.getView<RadioButton>(R.id.rbSelect)
                 radioButton.visibility = if (inSelectMode) View.VISIBLE else View.GONE
 
@@ -30,7 +31,7 @@ class CarFuelAdapter : BaseQuickAdapter<CarFuel, BaseViewHolder>(R.layout.item_c
                 setText(R.id.tvPrice, price.toString())
                 getView<View>(R.id.root).safeClicks().subscribe {
                     Intent(context, CarFuelUpdateAct::class.java).apply {
-                        putExtra(Param, item)
+                        putExtra(Param, this@with)
                     }.let { context.startActivity(it) }
                 }
             }
