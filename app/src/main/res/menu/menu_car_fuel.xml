@@ -11,7 +11,11 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/car_fuel_export"
-        android:title="导出"
+        android:id="@+id/car_fuel_export_all"
+        android:title="导出全部"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/car_fuel_export_part"
+        android:title="导出部分"
         app:showAsAction="never" />
 </menu>

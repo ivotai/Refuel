@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItems
+import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.refuel.R
 import com.unicorn.refuel.app.RxBus
 import com.unicorn.refuel.app.inSelectMode
@@ -17,6 +16,7 @@ import com.unicorn.refuel.app.startAct
 import com.unicorn.refuel.app.toBeanList
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
 import com.unicorn.refuel.data.event.CarFuelSearchEvent
+import com.unicorn.refuel.data.event.ChangeSelectModeEvent
 import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
@@ -48,18 +48,18 @@ class CarFueFra : PageFra<CarFuel>() {
                     startAct(CarFuelAddAct::class.java)
                     true
                 }
-                R.id.car_fuel_export -> {
-                    MaterialDialog(requireContext()).show {
-                        listItems(items = listOf("导出全部", "导出部分")) { _, index, _ ->
-                            if (index == 0) {
-                                // todo export all cool!
-                            } else {
-                                if (!inSelectMode) startSelectMode()
-                                else {
-                                    // todo export selects
-                                }
-                            }
-                        }
+                R.id.car_fuel_export_all -> {
+                    ToastUtils.showShort("成功导出全部记录")
+                    true
+
+                }
+                R.id.car_fuel_export_part -> {
+                    // 如果没有开启选择模式，则开启选择模式
+                    if (!inSelectMode) RxBus.post(ChangeSelectModeEvent(true))
+                    else {
+                        // 如果开启了，则导出部分数据并关闭选择模式
+                        ToastUtils.showShort("成功导出选中记录")
+                        RxBus.post(ChangeSelectModeEvent(false))
                     }
                     true
                 }
@@ -82,11 +82,6 @@ class CarFueFra : PageFra<CarFuel>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun startSelectMode() {
-        inSelectMode = true
-        pageAdapter.notifyDataSetChanged()
-    }
-
     override fun initEvents() {
         super.initEvents()
         RxBus.registerEvent(this, CarFuelSearchEvent::class.java, {
@@ -95,6 +90,10 @@ class CarFueFra : PageFra<CarFuel>() {
         })
         RxBus.registerEvent(this, CarFuelRefreshEvent::class.java, {
             loadStartPage()
+        })
+        RxBus.registerEvent(this, ChangeSelectModeEvent::class.java, {
+            inSelectMode = it.inSelectMode
+            pageAdapter.notifyDataSetChanged()
         })
     }
 
