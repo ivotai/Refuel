@@ -28,16 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
 
-    <EditText
-        android:id="@+id/etCarNo"
+    <TextView
+        android:id="@+id/tvCarNo"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginEnd="16dp"
         android:background="@null"
-        android:enabled="false"
         android:gravity="end"
         android:hint="选择车辆"
-        android:inputType="text"
         android:textColor="@color/md_grey_900"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/lCarNo"
@@ -51,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerThickness="1px"
-        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
         app:layout_constraintStart_toStartOf="@+id/lCarNo"
         app:layout_constraintTop_toBottomOf="@+id/lCarNo" />
 
@@ -87,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerThickness="1px"
-        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
         app:layout_constraintStart_toStartOf="@+id/lFuelCardNo"
         app:layout_constraintTop_toBottomOf="@+id/lFuelCardNo" />
 
@@ -124,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerThickness="1px"
-        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
         app:layout_constraintStart_toStartOf="@+id/lFuelLabelNumber"
         app:layout_constraintTop_toBottomOf="@+id/lFuelLabelNumber" />
 
@@ -161,7 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerThickness="1px"
-        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
         app:layout_constraintStart_toStartOf="@+id/lUnitPrice"
         app:layout_constraintTop_toBottomOf="@+id/lUnitPrice" />
 
@@ -198,7 +196,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerThickness="1px"
-        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
         app:layout_constraintStart_toStartOf="@+id/lFuelAmount"
         app:layout_constraintTop_toBottomOf="@+id/lFuelAmount" />
 
@@ -235,7 +233,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerThickness="1px"
-        app:layout_constraintEnd_toEndOf="@+id/etCarNo"
+        app:layout_constraintEnd_toEndOf="@+id/tvCarNo"
         app:layout_constraintStart_toStartOf="@+id/lPrice"
         app:layout_constraintTop_toBottomOf="@+id/lPrice" />
 

@@ -6,19 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.unicorn.refuel.app.RxBus
+import com.unicorn.refuel.app.finishAct
 import com.unicorn.refuel.app.toBeanList
+import com.unicorn.refuel.data.event.CarSelectEvent
 import com.unicorn.refuel.data.model.Car
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
 import com.unicorn.refuel.data.model.param.CarListParam
 import com.unicorn.refuel.databinding.FraCarBinding
-import com.unicorn.refuel.databinding.UiTitleSwipeBinding
 import com.unicorn.refuel.ui.adapter.CarAdapter
 import com.unicorn.refuel.ui.fra.base.PageFra
 import io.reactivex.rxjava3.core.Single
 
 class CarFra : PageFra<Car>() {
+
+    override fun initEvents() {
+        RxBus.registerEvent(this, CarSelectEvent::class.java, {
+            finishAct()
+        })
+    }
 
     override fun addItemDecoration() {
         // no item decoration
