@@ -1,20 +1,15 @@
-package com.unicorn.refuel.ui.fra
+package com.unicorn.refuel.ui.fra.carFuel
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.blankj.utilcode.util.ConvertUtils
-import com.king.zxing.CameraScan
-import com.king.zxing.CaptureActivity
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum
 import com.nightonke.boommenu.BoomButtons.HamButton
 import com.nightonke.boommenu.ButtonEnum
@@ -27,7 +22,7 @@ import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.base.EncryptionRequest
 import com.unicorn.refuel.data.model.base.PageRequest
 import com.unicorn.refuel.data.model.base.PageResponse
-import com.unicorn.refuel.data.model.param.CarFuelListParam
+import com.unicorn.refuel.data.model.param.carFuel.CarFuelListParam
 import com.unicorn.refuel.databinding.FraCarFuelBinding
 import com.unicorn.refuel.ui.act.CarFuelAddAct
 import com.unicorn.refuel.ui.adapter.CarFuelAdapter

@@ -1,6 +1,7 @@
 package com.unicorn.refuel.data.model
 
 import com.unicorn.refuel.data.model.base.BasePostInfo
+import java.io.Serializable
 import java.util.*
 
 data class CarFuel(
@@ -17,4 +18,4 @@ data class CarFuel(
     val createdBy: String,
     val createdByUserName: String,
     val createdServerTime: Date
-) : BasePostInfo()
+) : BasePostInfo(), Serializable

@@ -25,4 +25,7 @@ interface SimpleApi {
     @POST("Maintenance/CarFuelAdd")
     fun addCarFuel(@Body encryptionRequest: EncryptionRequest): Single<BaseResponse<CarFuel>>
 
+    @POST("Maintenance/CarFuelUpdate")
+    fun updateCarFuel(@Body encryptionRequest: EncryptionRequest): Single<BaseResponse<CarFuel>>
+
 }

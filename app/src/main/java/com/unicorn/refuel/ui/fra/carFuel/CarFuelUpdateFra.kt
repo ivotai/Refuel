@@ -1,4 +1,4 @@
-package com.unicorn.refuel.ui.fra
+package com.unicorn.refuel.ui.fra.carFuel
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -27,14 +27,17 @@ import com.unicorn.refuel.app.third.RecognizeService
 import com.unicorn.refuel.data.event.CarFuelRefreshEvent
 import com.unicorn.refuel.data.event.CarSelectEvent
 import com.unicorn.refuel.data.model.Car
+import com.unicorn.refuel.data.model.CarFuel
 import com.unicorn.refuel.data.model.RecognizeResult
 import com.unicorn.refuel.data.model.base.EncryptionRequest
-import com.unicorn.refuel.data.model.param.CarFuelAddParam
+import com.unicorn.refuel.data.model.param.carFuel.CarFuelAddParam
 import com.unicorn.refuel.databinding.FraCarFuelDetailBinding
 import com.unicorn.refuel.ui.act.CarAct
 import com.unicorn.refuel.ui.fra.base.BaseFra
 
-class CarFuelAddFra : BaseFra() {
+class CarFuelUpdateFra : BaseFra() {
+
+    private val carFuel by lazy { requireArguments().getSerializable(Param) as CarFuel }
 
     override fun initViews() = with(binding) {
         binding.btnRecognize.icon =
@@ -95,7 +98,7 @@ class CarFuelAddFra : BaseFra() {
         )
         btnSubmit.isEnabled = false
         api.addCarFuel(EncryptionRequest.create(carFuelAddParam))
-            .lifeOnMain(this@CarFuelAddFra)
+            .lifeOnMain(this@CarFuelUpdateFra)
             .subscribe(
                 {
                     btnSubmit.isEnabled = true
@@ -142,14 +145,14 @@ class CarFuelAddFra : BaseFra() {
     private var carId: Int? = null
 
     override fun initEvents() = with(binding) {
-        RxBus.registerEvent(this@CarFuelAddFra, CarSelectEvent::class.java, {
+        RxBus.registerEvent(this@CarFuelUpdateFra, CarSelectEvent::class.java, {
             onCar(it.car)
         })
     }
 
     private fun onCar(car: Car) = with(binding) {
         tvCarNo.text = car.no
-        this@CarFuelAddFra.carId = car.id
+        this@CarFuelUpdateFra.carId = car.id
     }
 
     //

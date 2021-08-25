@@ -2,7 +2,7 @@ package com.unicorn.refuel.ui.pager
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.unicorn.refuel.ui.fra.CarFueFra
+import com.unicorn.refuel.ui.fra.carFuel.CarFueFra
 import com.unicorn.refuel.ui.fra.TestFra
 
 class MainPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

@@ -20,6 +20,7 @@ import org.joda.time.DateTime
 import retrofit2.HttpException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.*
@@ -53,6 +54,7 @@ fun ViewPager2.removeEdgeEffect() {
 
 fun Throwable.errorMsg(): String {
     val errorMsg = when (this) {
+        is ConnectException -> "服务器没起？"
         is UnknownHostException -> "接口地址设置有误或无网络"
         is SocketTimeoutException -> "超时了"
         is HttpException -> when (code()) {

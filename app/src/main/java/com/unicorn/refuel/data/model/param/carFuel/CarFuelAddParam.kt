@@ -1,4 +1,4 @@
-package com.unicorn.refuel.data.model.param
+package com.unicorn.refuel.data.model.param.carFuel
 
 import com.unicorn.refuel.app.toTransferFormat
 import com.unicorn.refuel.data.model.base.BasePostInfo
