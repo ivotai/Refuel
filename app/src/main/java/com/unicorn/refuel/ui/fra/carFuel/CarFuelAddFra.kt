@@ -22,7 +22,9 @@ class CarFuelAddFra : CarFuelDetailFra() {
             unitPrice = etUnitPrice.trimText().toDouble(),
             fuelAmount = etFuelAmount.trimText().toDouble(),
             price = etPrice.trimText().toDouble(),
-            userName = etUserName.trimText()
+            userName = etUserName.trimText(),
+            // todo
+            fuelUpTime = tvFuelUpTime.trimText()
         )
         btnSubmit.isEnabled = false
         api.addCarFuel(EncryptionRequest.create(carFuelAddParam))

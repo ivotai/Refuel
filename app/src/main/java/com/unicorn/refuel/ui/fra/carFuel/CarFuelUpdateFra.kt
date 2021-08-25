@@ -24,6 +24,8 @@ class CarFuelUpdateFra : CarFuelDetailFra() {
             etFuelAmount.setText(fuelAmount.toString())
             etPrice.setText(price.toString())
             etUserName.setText(userName)
+            // todo
+            tvFuelUpTime.text = fuelUpTime.toDisplayFormat()
         }
     }
 
@@ -36,7 +38,8 @@ class CarFuelUpdateFra : CarFuelDetailFra() {
             unitPrice = etUnitPrice.trimText().toDouble(),
             fuelAmount = etFuelAmount.trimText().toDouble(),
             price = etPrice.trimText().toDouble(),
-            userName = etUserName.trimText()
+            userName = etUserName.trimText(),
+            fuelUpTime = tvFuelUpTime.trimText()
         )
         btnSubmit.isEnabled = false
         api.updateCarFuel(EncryptionRequest.create(carFuelUpdateParam))
