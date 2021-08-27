@@ -169,7 +169,7 @@ abstract class CarFuelDetailFra : RecognizeFra() {
         launcherRecognize =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.data == null) return@registerForActivityResult
-                RecognizeService.recognizeGeneralBasic(
+                RecognizeService.recognizeAccurateBasic(
                     requireContext(),
                     FileUtil.getSaveFile(requireContext()).absolutePath
                 ) { result -> onRecognize(result = result) }

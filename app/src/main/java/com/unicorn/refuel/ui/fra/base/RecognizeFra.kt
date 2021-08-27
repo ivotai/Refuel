@@ -44,7 +44,7 @@ abstract class RecognizeFra : BaseFra() {
         OCR.getInstance(requireContext()).release()
     }
 
-    protected fun getRecognizeIntent(): Intent {
+    private fun getRecognizeIntent(): Intent {
         val intent = Intent(requireContext(), CameraActivity::class.java)
         intent.putExtra(
             CameraActivity.KEY_OUTPUT_FILE_PATH,
