@@ -41,7 +41,7 @@ class CarFuelAdapter : BaseQuickAdapter<CalFuelSelect, BaseViewHolder>(R.layout.
                 getView<RadioButton>(R.id.rbSelect).visibility =
                     if (inSelectMode) View.VISIBLE else View.GONE
                 getView<RadioButton>(R.id.rbSelect).isChecked = item.isSelected
-                setText(R.id.tvFuelUpTime, fuelUpTime.toDisplayFormat())
+                setText(R.id.tvFuelUpTime, fuelUpTime.toTransferFormat())
                 setText(R.id.tvCarNo, carNo)
                 setText(R.id.tvFuelAmount, "${fuelAmount}升")
                 setText(R.id.tvPrice, price.toString())

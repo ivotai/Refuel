@@ -51,8 +51,8 @@ abstract class CarFuelDetailFra : RecognizeFra() {
 
         tvFuelUpTime.safeClicks().subscribe {
             MaterialDialog(requireContext()).show {
-                dateTimePicker(requireFutureDateTime = true) { _, dateTime ->
-                    tvFuelUpTime.text = dateTime.time.toDisplayFormat()
+                dateTimePicker { _, dateTime ->
+                    tvFuelUpTime.text = dateTime.time.toTransferFormat()
                 }
             }
         }

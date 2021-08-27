@@ -24,7 +24,7 @@ class CarFuelUpdateFra : CarFuelDetailFra() {
             etFuelAmount.setText(fuelAmount.toString())
             etPrice.setText(price.toString())
             etUserName.setText(userName)
-            tvFuelUpTime.text = fuelUpTime.toDisplayFormat()
+            tvFuelUpTime.text = fuelUpTime.toTransferFormat()
         }
     }
 

@@ -95,7 +95,7 @@ fun Date.toDisplayFormat(): String = DateTime(this).toString(displayDateFormat)
 fun Date.toTransferFormat(): String = DateTime(this).toString(transferDateFormat)
 
 fun String.toDate(): Date {
-    val dateTimeFormatter = DateTimeFormat.forPattern(displayDateFormat)
+    val dateTimeFormatter = DateTimeFormat.forPattern(transferDateFormat)
     val dateTime: DateTime = dateTimeFormatter.parseDateTime(this)
     return dateTime.toDate()
 }
