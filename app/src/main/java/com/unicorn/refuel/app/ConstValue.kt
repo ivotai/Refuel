@@ -12,7 +12,7 @@ const val SESSION = "SESSION"
 
 const val Param = "Param"
 
-const val displayDateFormat = "yyyy年MM月dd日HH:mm:dd"
+const val displayDateFormat = "yyyy年MM月dd日HH:mm:ss"
 
 const val transferDateFormat = "yyyy-MM-dd HH:mm:ss"
 

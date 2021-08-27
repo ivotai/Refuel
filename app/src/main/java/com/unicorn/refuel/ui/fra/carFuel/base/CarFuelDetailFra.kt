@@ -52,7 +52,7 @@ abstract class CarFuelDetailFra : RecognizeFra() {
         tvFuelUpTime.safeClicks().subscribe {
             MaterialDialog(requireContext()).show {
                 dateTimePicker { _, dateTime ->
-                    tvFuelUpTime.text = dateTime.time.toTransferFormat()
+                    tvFuelUpTime.text = dateTime.time.toDisplayFormat()
                 }
             }
         }
@@ -140,6 +140,8 @@ abstract class CarFuelDetailFra : RecognizeFra() {
         tvCarNo.text = car.no
         this@CarFuelDetailFra.carId = car.id
     }
+
+    //
 
     //
 

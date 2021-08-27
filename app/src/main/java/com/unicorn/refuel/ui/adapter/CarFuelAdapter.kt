@@ -25,7 +25,6 @@ class CarFuelAdapter : BaseQuickAdapter<CalFuelSelect, BaseViewHolder>(R.layout.
                 if (inSelectMode) {
                     item.isSelected = !item.isSelected
                     notifyItemChanged(adapterPosition)
-                    adapterPosition.toString().toast()
                 } else {
                     Intent(context, CarFuelUpdateAct::class.java).apply {
                         putExtra(Param, item.carFuel)

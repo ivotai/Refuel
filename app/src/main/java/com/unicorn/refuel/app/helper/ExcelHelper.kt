@@ -2,9 +2,11 @@ package com.unicorn.refuel.app.helper
 
 import android.content.Context
 import android.content.Intent
+import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.UriUtils
 import com.unicorn.refuel.app.RxBus
 import com.unicorn.refuel.app.SimpleComponent
+import com.unicorn.refuel.app.toDisplayFormat
 import com.unicorn.refuel.app.toast
 import com.unicorn.refuel.data.event.ChangeSelectModeEvent
 import com.unicorn.refuel.data.model.CarFuel
@@ -13,6 +15,7 @@ import jxl.write.DateTime
 import jxl.write.Label
 import jxl.write.Number
 import java.io.File
+import java.util.*
 
 object ExcelHelper {
 
@@ -23,7 +26,11 @@ object ExcelHelper {
     fun exportCarFuels(context: Context, carFuels: List<CarFuel>) {
         val dir = File(SimpleComponent().context.filesDir, "excel")
         dir.mkdir()
-        val file = File(dir, "车辆加油记录.xls")
+        FileUtils.deleteAllInDir(dir)
+
+        val file = File(dir, "车辆加油记录${org.joda.time.DateTime().toString("yyyy年MM月dd日HHmmss")}.xls")
+        file.createNewFile()
+
         val workbook = Workbook.createWorkbook(file)
         val sheet = workbook.createSheet("车辆加油记录", 0)
 
@@ -45,13 +52,13 @@ object ExcelHelper {
 
         "成功导出${carFuels.size}记录".toast()
         RxBus.post(ChangeSelectModeEvent(false))
-        share(context)
+        share(context, file)
     }
 
-    private fun share(context: Context) {
-        val dir = File(SimpleComponent().context.filesDir, "excel")
-        dir.mkdir()
-        val file = File(dir, "车辆加油记录.xls")
+    private fun share(context: Context, file: File) {
+//        val dir = File(SimpleComponent().context.filesDir, "excel")
+//        dir.mkdir()
+//        val file = File(dir, "车辆加油记录.xls")
         val uri = UriUtils.file2Uri(file)
 //        val uri = FileProvider.getUriForFile(this, "com.example.receipt.fileprovider", file)
         val intent = Intent().apply {
