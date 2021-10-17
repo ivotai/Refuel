@@ -110,8 +110,13 @@ abstract class CarFuelDetailFra : RecognizeFra() {
             if (it.contains("单价")) {
                 etUnitPrice.setText(it.removePrefix("单价:").removeSuffix("元/升"))
             }
-            if (it.contains("加油升数")) {
-                etFuelAmount.setText(it.removePrefix("加油升数:").removeSuffix("升"))
+            // 处理升数和加油升数两种情况
+            if (it.contains("升数")) {
+                if (it.contains("加油升数")) {
+                    etFuelAmount.setText(it.removePrefix("加油升数:").removeSuffix("升"))
+                } else {
+                    etFuelAmount.setText(it.removePrefix("升数:").removeSuffix("升"))
+                }
             }
             if (it.contains("应付")) {
                 etPrice.setText(it.removePrefix("应付:").removeSuffix("元"))
