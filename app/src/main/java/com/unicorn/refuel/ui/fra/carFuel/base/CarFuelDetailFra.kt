@@ -100,7 +100,8 @@ abstract class CarFuelDetailFra : RecognizeFra() {
     //
     private fun onRecognize(result: String) = with(binding) {
         val recognizeResult = result.toBean<RecognizeResult>()
-        recognizeResult.words_result.map { it.words }.forEach {
+        val words = recognizeResult.words_result.map { it.words.replace("：", ":") }
+        words.forEach {
             if (it.contains("卡号")) {
                 etFuelCardNo.setText(it.removePrefix("卡号:"))
             }
