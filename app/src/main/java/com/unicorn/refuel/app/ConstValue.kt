@@ -1,6 +1,7 @@
 package com.unicorn.refuel.app
 
-const val baseUrl = "http://renjiawen1988.vicp.cc:33333/shpc.smartkeybox/api/"
+//const val baseUrl = "http://renjiawen1988.vicp.cc:33333/shpc.smartkeybox/api/"
+const val baseUrl = "https://car.menze.net.cn/SHPC.SmartKeyBox/api/"
 const val uploadUrl = "http://csp.seafa.kjgk.xyz:8000/public/file/upload"
 const val attachments = "attachments"
 
